@@ -28,10 +28,11 @@ class Tetromino(ABC):
 
 	def __init__(self):
 		self.resetPos()
-		self.current_rotation = 0
-		self.width_difference = 0
+		self.initShape()
 
 	def initShape(self):
+		self.current_rotation = 0
+		self.width_difference = 0
 		self.shape = self.shapes[0]
 
 	def rotate(self):
@@ -43,11 +44,20 @@ class Tetromino(ABC):
 	def moveDown(self):
 		self.position["y"] += 1
 
+	def checkX(self):
+		if(self.position["x"] < 0):
+			x = 0 - self.position["x"] -1
+			return x
+		else:
+			above = (self.position["x"] + len(self.shape[0])) - 9
+			return len(self.shape[0]) - above
+
 	def moveLeft(self):
 		self.position["x"] -= 1
 		if(self.position["x"] < 0):
+			x = self.checkX()
 			for y in range(len(self.shape)):
-				if(self.shape[y][self.position["x"]] != BLACK):
+				if(self.shape[y][x] != BLACK):
 					self.position["x"] += 1
 					break
 
@@ -55,10 +65,10 @@ class Tetromino(ABC):
 		self.position["x"] += 1
 		if(self.position["x"] + len(self.shape[0]) > 10):
 			for y in range(len(self.shape)):
-				for x in range(self.position["x"], self.position["x"] + len(self.shape[0])):
-					if x >= 10 and self.shape[y][x] != BLACK:
-						self.position["x"] -= 1
-						break
+				x = self.checkX()
+				if self.shape[y][x] != BLACK:
+					self.position["x"] -= 1
+					break
 
 class Straight(Tetromino):
 	def setColor(self):

@@ -17,6 +17,8 @@ WINDOW = pygame.display.set_mode((_WINDOW_WIDTH, _WINDOW_HEIGHT))
 pygame.display.set_caption("Tetris Window")
 WHITE_COLOR = tetris_to_pygame_color(WHITE)
 
+# GLOBAL VARIABLES
+# Tetromino objects
 T_STRAIGHT = Straight()
 T_SQUARE = Square()
 T_LEFTL = LeftLShape()
@@ -96,7 +98,7 @@ class PlayField(BaseField):
 		self.last_move_down = 0
 
 	def moveDown(self):
-		if self.falling == STILL:
+		if self.falling == STILL or self.piece == None:
 			return
 		self.piece.moveDown()
 
@@ -111,9 +113,67 @@ class PlayField(BaseField):
 		self.piece.reset()
 		self.addPieceToField()
 
+class HandleKeys():
+	keys = {}
+	lastMove = {}
+
+	def __init__(self):
+		self.reset()
+	
+	def reset(self):
+		self.keys = {
+			"UP": False,
+			"DOWN": False,
+			"LEFT": False,
+			"RIGHT": False,
+		}
+		self.lastMove = {
+			"UP": 0,
+			"DOWN": 0,
+			"LEFT": 0,
+			"RIGHT": 0,
+		}
+
+	def updateKeys(self, event, playField):
+		if event.type == pygame.KEYDOWN:
+			if event.key == pygame.K_DOWN:
+				self.keys["DOWN"] = True
+			if event.key == pygame.K_LEFT:
+				self.keys["LEFT"] = True
+			if event.key == pygame.K_RIGHT:
+				self.keys["RIGHT"] = True
+			if event.key == pygame.K_UP:
+				self.keys["UP"] = True
+		if event.type == pygame.KEYUP:
+			if event.key == pygame.K_DOWN:
+				self.keys["DOWN"] = False
+			if event.key == pygame.K_LEFT:
+				self.keys["LEFT"] = False
+			if event.key == pygame.K_RIGHT:
+				self.keys["RIGHT"] = False
+			if event.key == pygame.K_UP:
+				self.keys["UP"] = False
+		
+	def makeMoves(self, playField, now):
+		if playField.piece == None or playField.falling == STILL:
+			return
+		if self.keys["DOWN"] and now - self.lastMove["DOWN"] >= 0.1:
+			playField.moveDown()
+			self.lastMove["DOWN"] = now
+		if self.keys["LEFT"] and now - self.lastMove["LEFT"] >= 0.1:
+			playField.piece.moveLeft()
+			self.lastMove["LEFT"] = now
+		if self.keys["RIGHT"] and now - self.lastMove["RIGHT"] >= 0.1:
+			playField.piece.moveRight()
+			self.lastMove["RIGHT"] = now
+		if self.keys["UP"] and now - self.lastMove["UP"] >= 0.1:
+			playField.piece.rotate()
+			self.lastMove["UP"] = now
+
 def main():
 
 	playField = PlayField()
+	handleKeys = HandleKeys()
 
 	endGame = False
 	while(not endGame):
@@ -128,18 +188,15 @@ def main():
 
 		playField.printPiece()
 
+		handleKeys.makeMoves(playField, now)
+
+		# register key events
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				endGame = True
-			if event.type == pygame.KEYDOWN:
-				if event.key == pygame.K_LEFT:
-					playField.piece.moveLeft()
-				if event.key == pygame.K_RIGHT:
-					playField.piece.moveRight()
-				if event.key == pygame.K_DOWN:
-					playField.moveDown()
-				if event.key == pygame.K_UP:
-					playField.piece.rotate()
+			# if event.type == pygame.KEYDOWN:
+			if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
+				handleKeys.updateKeys(event, playField)
 
 		full_screen = pygame.Rect(0, 0, _WINDOW_WIDTH, _WINDOW_HEIGHT)
 		WINDOW.fill(pygame.Color(0, 0, 0), full_screen, 0)
