@@ -1,24 +1,7 @@
 from abc import ABC, abstractmethod
-from enum import Enum
+from colors import BLACK, CYAN, BLUE, ORANGE, YELLOW, GREEN, RED, PURPLE, WHITE
 
-class TetrisColor(Enum):
-	BLACK = 0
-	CYAN = 1        # I (Straight)
-	BLUE = 2        # J (Left L-shape)
-	ORANGE = 3      # L (Right L-shape)
-	YELLOW = 4      # O (Square)
-	GREEN = 5       # S (Z-shape, left)
-	RED = 6         # Z (Z-shape, right)
-	PURPLE = 7      # T (T-shape)
-
-BLACK, CYAN, BLUE, ORANGE, YELLOW, GREEN, RED, PURPLE = (
-	TetrisColor.BLACK, TetrisColor.CYAN, TetrisColor.BLUE, TetrisColor.ORANGE,
-	TetrisColor.YELLOW, TetrisColor.GREEN, TetrisColor.RED,
-	TetrisColor.PURPLE
-)
-
-class tetromino(ABC):
-	starting_pos = {}
+class Tetromino(ABC):
 	current_rotation : int
 	width_difference : int
 	shape = []
@@ -35,8 +18,12 @@ class tetromino(ABC):
 	def setShapes():
 		pass
 
+	@abstractmethod
+	def reset():
+		pass
+
 	def resetPos(self):
-		self.position["x"] = 4
+		self.position["x"] = 3
 		self.position["y"] = 0
 
 	def __init__(self):
@@ -58,11 +45,22 @@ class tetromino(ABC):
 
 	def moveLeft(self):
 		self.position["x"] -= 1
+		if(self.position["x"] < 0):
+			for y in range(len(self.shape)):
+				if(self.shape[y][self.position["x"]] != BLACK):
+					self.position["x"] += 1
+					break
 
 	def moveRight(self):
 		self.position["x"] += 1
+		if(self.position["x"] + len(self.shape[0]) > 10):
+			for y in range(len(self.shape)):
+				for x in range(self.position["x"], self.position["x"] + len(self.shape[0])):
+					if x >= 10 and self.shape[y][x] != BLACK:
+						self.position["x"] -= 1
+						break
 
-class Straight(tetromino):
+class Straight(Tetromino):
 	def setColor(self):
 		self.color =  CYAN
 
@@ -85,7 +83,7 @@ class Straight(tetromino):
 		self.setShapes()
 		self.initShape()
 
-class Square(tetromino):
+class Square(Tetromino):
 	def setColor(self):
 		self.color = YELLOW
 
@@ -108,7 +106,7 @@ class Square(tetromino):
 		self.setShapes()
 		self.initShape()
 
-class LeftLShape(tetromino):
+class LeftLShape(Tetromino):
 	def setColor(self):
 		self.color = BLUE
 
@@ -136,7 +134,7 @@ class LeftLShape(tetromino):
 		self.setShapes()
 		self.initShape()
 
-class RightLShape(tetromino):
+class RightLShape(Tetromino):
 	def setColor(self):
 		self.color = ORANGE
 
@@ -164,7 +162,7 @@ class RightLShape(tetromino):
 		self.setShapes()
 		self.initShape()
 
-class ZShape(tetromino):
+class ZShape(Tetromino):
 	def setColor(self):
 		self.color = RED
 
@@ -187,7 +185,7 @@ class ZShape(tetromino):
 		self.setShapes()
 		self.initShape()
 
-class SShape(tetromino):
+class SShape(Tetromino):
 	def setColor(self):
 		self.color = GREEN
 
@@ -210,7 +208,7 @@ class SShape(tetromino):
 		self.setShapes()
 		self.initShape()
 
-class TShape(tetromino):
+class TShape(Tetromino):
 	def setColor(self):
 		self.color = PURPLE
 
@@ -239,7 +237,7 @@ class TShape(tetromino):
 		self.setShapes()
 		self.initShape()
 
-class JShape(tetromino):
+class JShape(Tetromino):
 	def setColor(self):
 		self.color = BLUE
 
