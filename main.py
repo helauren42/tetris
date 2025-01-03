@@ -50,7 +50,7 @@ class BaseField(ABC):
 				line.append((BLACK, STILL))
 			field.append(line)
 		return field
-	
+
 	def clearFallingPiece(self):
 		for y in range(self._height):
 			for x in range(self._width):
