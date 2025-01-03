@@ -49,7 +49,7 @@ class BaseField(ABC):
 			for x in range(self._width):
 				line.append((BLACK, STILL))
 			field.append(line)
-		return field		
+		return field
 	
 	def clearFallingPiece(self):
 		for y in range(self._height):
@@ -78,7 +78,7 @@ class BaseField(ABC):
 					self.field[y][x] = (self.piece.shape[y - start_y][x - start_x], FALLING)
 					if y >= 19 or (self.field[y +1][x][0] != BLACK and self.field[y +1][x][1] == STILL):
 						self.falling = STILL
-	
+
 		if self.falling == STILL:
 			self.stillifyFallingPiece()
 
