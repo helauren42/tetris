@@ -7,6 +7,7 @@ from colors import BLACK, CYAN, BLUE, ORANGE, YELLOW, GREEN, RED, PURPLE, WHITE,
 from tetronimos import Tetromino,Straight, Square, LeftLShape, RightLShape, ZShape, SShape, TShape, JShape
 from enum import Enum
 from typing import Optional
+import logging
 
 # CONST GLOBAL VARIABLES
 _WINDOW_HEIGHT = 800
@@ -58,7 +59,7 @@ class BaseField(ABC):
 			for x in range(self._width):
 				if self.field[y][x][1] == FALLING:
 					self.field[y][x] = (BLACK, STILL)
-	
+
 	def stillifyFallingPiece(self):
 		for y in range(self._height):
 			for x in range(self._width):
@@ -110,6 +111,7 @@ class PlayField(BaseField):
 		self.last_move_down = time.time()
 		self.falling = FALLING
 		self.piece = random.choice([T_STRAIGHT, T_SQUARE, T_LEFTL, T_RIGHTL, T_Z, T_S, T_T, T_J])
+		# self.piece = T_STRAIGHT
 		self.piece.reset()
 		self.addPieceToField()
 
@@ -153,7 +155,7 @@ class HandleKeys():
 				self.keys["RIGHT"] = False
 			if event.key == pygame.K_UP:
 				self.keys["UP"] = False
-		
+
 	def makeMoves(self, playField, now):
 		if playField.piece == None or playField.falling == STILL:
 			return
@@ -166,7 +168,7 @@ class HandleKeys():
 		if self.keys["RIGHT"] and now - self.lastMove["RIGHT"] >= 0.1:
 			playField.piece.moveRight()
 			self.lastMove["RIGHT"] = now
-		if self.keys["UP"] and now - self.lastMove["UP"] >= 0.1:
+		if self.keys["UP"] and now - self.lastMove["UP"] >= 0.2:
 			playField.piece.rotate()
 			self.lastMove["UP"] = now
 
@@ -174,6 +176,7 @@ def main():
 
 	playField = PlayField()
 	handleKeys = HandleKeys()
+	logging.basicConfig(filename="tetris.log", level=logging.DEBUG, filemode="w")
 
 	endGame = False
 	while(not endGame):

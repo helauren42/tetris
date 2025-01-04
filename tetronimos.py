@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from colors import BLACK, CYAN, BLUE, ORANGE, YELLOW, GREEN, RED, PURPLE, WHITE
+import logging
 
 class Tetromino(ABC):
 	current_rotation : int
@@ -10,6 +11,18 @@ class Tetromino(ABC):
 	shapes = {}
 	color = BLACK
 
+	def __init__(self):
+		self.resetPos()
+		self.initShape()
+
+	def __str__(self):
+		ret = ""
+		for y in range(len(self.shape)):
+			for x in range(len(self.shape[y])):
+				ret += str(self.shape[y][x]) + ","
+			ret += "\n"
+		return ret
+	
 	@abstractmethod
 	def setColor():
 		pass
@@ -26,10 +39,6 @@ class Tetromino(ABC):
 		self.position["x"] = 3
 		self.position["y"] = 0
 
-	def __init__(self):
-		self.resetPos()
-		self.initShape()
-
 	def initShape(self):
 		self.current_rotation = 0
 		self.width_difference = 0
@@ -45,15 +54,18 @@ class Tetromino(ABC):
 		self.position["y"] += 1
 
 	def checkX(self):
+		logging.info(f"checkX: {9 - self.position['x']}")
 		if(self.position["x"] < 0):
 			x = 0 - self.position["x"] -1
 			return x
 		else:
-			above = (self.position["x"] + len(self.shape[0])) - 9
-			return len(self.shape[0]) - above
+			return 10 - self.position["x"]
 
 	def moveLeft(self):
 		self.position["x"] -= 1
+		text = self.__str__()
+		logging.info(f"shape: {text}")
+		logging.info(f"position: {self.position}")
 		if(self.position["x"] < 0):
 			x = self.checkX()
 			for y in range(len(self.shape)):
@@ -62,6 +74,9 @@ class Tetromino(ABC):
 					break
 
 	def moveRight(self):
+		text = self.__str__()
+		logging.info(f"shape: {text}")
+		logging.info(f"position: {self.position}")
 		self.position["x"] += 1
 		if(self.position["x"] + len(self.shape[0]) > 10):
 			for y in range(len(self.shape)):
@@ -69,6 +84,7 @@ class Tetromino(ABC):
 				if self.shape[y][x] != BLACK:
 					self.position["x"] -= 1
 					break
+		logging.info(f"2position: {self.position}")
 
 class Straight(Tetromino):
 	def setColor(self):
