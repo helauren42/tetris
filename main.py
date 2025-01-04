@@ -78,8 +78,8 @@ class BaseField(ABC):
 			for x in range(start_x, end_x):
 				color = self.piece.shape[y - start_y][x - start_x]
 				if color != BLACK:
-					self.field[y][x] = (self.piece.shape[y - start_y][x - start_x], FALLING)
-					if y >= 19 or (self.field[y +1][x][0] != BLACK and self.field[y +1][x][1] == STILL):
+					self._field[y][x] = (self.piece.shape[y - start_y][x - start_x], FALLING)
+					if y >= 19 or (self._field[y +1][x][0] != BLACK and self._field[y +1][x][1] == STILL):
 						self.falling = STILL
 
 		if self.falling == STILL:
@@ -169,7 +169,7 @@ class HandleKeys():
 			playField.piece.moveRight()
 			self.lastMove["RIGHT"] = now
 		if self.keys["UP"] and now - self.lastMove["UP"] >= 0.2:
-			playField.piece.rotate()
+			playField.piece.rotate(playField.field)
 			self.lastMove["UP"] = now
 
 def main():

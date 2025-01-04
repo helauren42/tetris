@@ -4,7 +4,6 @@ import logging
 
 class Tetromino(ABC):
 	current_rotation : int
-	width_difference : int
 	shape = []
 	position = {}
 
@@ -41,13 +40,29 @@ class Tetromino(ABC):
 
 	def initShape(self):
 		self.current_rotation = 0
-		self.width_difference = 0
 		self.shape = self.shapes[0]
 
-	def rotate(self):
+	def rotate(self, field : list):
+		prev = self.current_rotation
 		self.current_rotation += 1
 		if(self.current_rotation >= len(self.shapes)):
 			self.current_rotation = 0
+
+		can_be_done = True
+		start_x = self.position["x"]
+		start_y = self.position["y"]
+		end_x = start_x + len(self.shape[0])
+		end_y = start_y + len(self.shape)
+		for y in range(start_y, end_y):
+			for x in range(start_x, end_x):
+				if(self.shapes[self.current_rotation][y - start_y][x - start_x] != BLACK) and (field[y][x] != BLACK):
+					logging.info(f"tetronimo can't be rotated: {self}")
+					logging.info(f"field: {field}")
+					can_be_done = False
+					break
+		if can_be_done == False:
+			self.current_rotation = prev
+		print("can be done: " + str(can_be_done))
 		self.shape = self.shapes[self.current_rotation]
 
 	def moveDown(self):
@@ -75,8 +90,6 @@ class Tetromino(ABC):
 
 	def moveRight(self):
 		text = self.__str__()
-		logging.info(f"shape: {text}")
-		logging.info(f"position: {self.position}")
 		self.position["x"] += 1
 		if(self.position["x"] + len(self.shape[0]) > 10):
 			for y in range(len(self.shape)):
@@ -84,7 +97,6 @@ class Tetromino(ABC):
 				if self.shape[y][x] != BLACK:
 					self.position["x"] -= 1
 					break
-		logging.info(f"2position: {self.position}")
 
 class Straight(Tetromino):
 	def setColor(self):
@@ -119,7 +131,7 @@ class Square(Tetromino):
 				[YELLOW, YELLOW]]
 		}
 
-	def rotate(self):
+	def rotate(self, field : list):
 		pass
 
 	def reset(self):
