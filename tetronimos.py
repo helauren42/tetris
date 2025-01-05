@@ -1,6 +1,23 @@
 from abc import ABC, abstractmethod
 from colors import BLACK, CYAN, BLUE, ORANGE, YELLOW, GREEN, RED, PURPLE, WHITE
 import logging
+from enum import Enum
+
+kickbacks = [
+	[0,0],
+	[1,0],
+	[0,1],
+	[1,1],
+	[-1,0],
+	[0,-1],
+	[-1,-1],
+]
+
+class Falling(Enum):
+	STILL = 0
+	FALLING = 1
+
+STILL, FALLING = (Falling.STILL, Falling.FALLING)
 
 class Tetromino(ABC):
 	current_rotation : int
@@ -48,21 +65,66 @@ class Tetromino(ABC):
 		if(self.current_rotation >= len(self.shapes)):
 			self.current_rotation = 0
 
+		print(f"current rotation: {self.current_rotation}")
+		print(f"prev rotation: {prev}")
+		curr_shape = self.shapes[self.current_rotation]
 		can_be_done = True
 		start_x = self.position["x"]
 		start_y = self.position["y"]
-		end_x = start_x + len(self.shape[0])
-		end_y = start_y + len(self.shape)
-		for y in range(start_y, end_y):
-			for x in range(start_x, end_x):
-				if(self.shapes[self.current_rotation][y - start_y][x - start_x] != BLACK) and (field[y][x] != BLACK):
-					logging.info(f"tetronimo can't be rotated: {self}")
-					logging.info(f"field: {field}")
+
+		found_first = False
+		first_block_y = start_y
+		last_block_y = first_block_y
+		for y in range(len(curr_shape)):
+			for x in range(len(curr_shape[y])):
+				if curr_shape[y][x] != BLACK:
+					found_first = True
+					continue
+			if not found_first:
+				first_block_y += 1
+				last_block_y = first_block_y
+			else:
+				last_block_y += 1
+
+		found_first = False
+		first_block_x = start_x
+		last_block_x = first_block_x
+		for x in range(len(curr_shape[0])):
+
+			for y in range(len(curr_shape)):
+				if curr_shape[y][x] != BLACK:
+					found_first = True
+					continue
+			if not found_first:
+				first_block_x += 1
+				last_block_x = first_block_x
+			else:
+				last_block_x += 1
+		
+		logging.info(f"first_block_x: {first_block_x} last_block_x: {last_block_x} first_block_y: {first_block_y} last_block_y: {last_block_y}")
+
+		if first_block_x < 0 or last_block_x > 10 or last_block_y >= 20:
+			logging.info("CANT ROTATE: first_block_x: " + str(first_block_x) + " last_block_x: " + str(last_block_x) + " first_block_y: " + str(first_block_y) + " last_block_y: " + str(last_block_y))
+			logging.info("curr_shape: " + str(curr_shape))
+			self.current_rotation = prev
+			self.shape = self.shapes[prev]
+			return
+
+		for y in range(len(curr_shape)):
+			for x in range(len(curr_shape[y])):
+				if y + start_y < 0 or y + start_y >= 20 or x + start_x < 0 or x + start_x >= 10:
+					continue
+				if (curr_shape[y][x] != BLACK) and (field[y + start_y][x + start_x] != (BLACK, STILL)):
+					logging.info(f"\n\ntetronimo can't be rotated: {self}")
+					logging.info(f"x: {x} y: {y}")
+					logging.info(f"field[{y + start_y}][{x + start_x}]: {field[y + start_y][x + start_x]}")
+					field_str = "\n".join(" ".join(str(cell[0]) for cell in row) for row in field)
+					logging.info(f"field: {field_str}")
 					can_be_done = False
 					break
 		if can_be_done == False:
 			self.current_rotation = prev
-		print("can be done: " + str(can_be_done))
+		logging.info("can be done: " + str(can_be_done))
 		self.shape = self.shapes[self.current_rotation]
 
 	def moveDown(self):
@@ -305,27 +367,3 @@ class JShape(Tetromino):
 		self.setColor()
 		self.setShapes()
 		self.initShape()
-
-# class TetrisGame:
-# 	def __init__(self, width=10, height=20):
-# 		self.width = width
-# 		self.height = height
-# 		self.board = [[BLACK for _ in range(width)] for _ in range(height)]
-# 		self.current_piece = None
-# 		self.spawn_new_piece()
-
-# 	def spawn_new_piece(self):
-# 		# Example of spawning a new piece. This can be randomized to pick a random shape.
-# 		self.current_piece = Straight()
-
-# 	def rotate_piece(self):
-# 		# Rotate the current piece
-# 		self.current_piece.rotate()
-
-# 	def move_piece(self, direction):
-# 		# Update the piece's position based on the direction
-# 		pass
-
-# 	def drop_piece(self):
-# 		# Drop the piece to the bottom of the board
-# 		pass

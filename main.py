@@ -4,8 +4,7 @@ import pygame
 import time
 import random
 from colors import BLACK, CYAN, BLUE, ORANGE, YELLOW, GREEN, RED, PURPLE, WHITE, tetris_to_pygame_color
-from tetronimos import Tetromino,Straight, Square, LeftLShape, RightLShape, ZShape, SShape, TShape, JShape
-from enum import Enum
+from tetronimos import Tetromino,Straight, Square, LeftLShape, RightLShape, ZShape, SShape, TShape, JShape, STILL, FALLING, Falling
 from typing import Optional
 import logging
 
@@ -29,12 +28,6 @@ T_S = SShape()
 T_T = TShape()
 T_J = JShape()
 
-class Falling(Enum):
-	STILL = 0
-	FALLING = 1
-
-STILL, FALLING = (Falling.STILL, Falling.FALLING)
-
 class BaseField(ABC):
 	falling : Falling = STILL
 	last_move_down = 0
@@ -44,6 +37,12 @@ class BaseField(ABC):
 		self._width = 10
 		self._height = 20
 		self.field = self.createField()
+
+	def __str__(self):
+		field_str = ""
+		for row in self.field:
+			field_str += " ".join(str(cell[0]) for cell in row) + "\n"
+		return field_str
 
 	def createField(self):
 		field = []
@@ -67,19 +66,19 @@ class BaseField(ABC):
 					self.field[y][x] = (self.field[y][x][0], STILL)
 		self.piece = None
 
-	def addPieceToField(self):
+	def updateFallingAndField(self):
 		if(self.piece == None or self.falling == STILL):
 			return
 		start_x = self.piece.position["x"]
 		start_y = self.piece.position["y"]
-		end_x = start_x + len(self.piece.shape[0])
-		end_y = start_y + len(self.piece.shape)
+		end_x = min(start_x + len(self.piece.shape[0]), 10)
+		end_y = min(start_y + len(self.piece.shape), 20)
 		for y in range(start_y, end_y):
 			for x in range(start_x, end_x):
 				color = self.piece.shape[y - start_y][x - start_x]
 				if color != BLACK:
-					self._field[y][x] = (self.piece.shape[y - start_y][x - start_x], FALLING)
-					if y >= 19 or (self._field[y +1][x][0] != BLACK and self._field[y +1][x][1] == STILL):
+					self.field[y][x] = (self.piece.shape[y - start_y][x - start_x], FALLING)
+					if y >= 19 or (self.field[y +1][x][0] != BLACK and self.field[y +1][x][1] == STILL):
 						self.falling = STILL
 
 		if self.falling == STILL:
@@ -105,7 +104,7 @@ class PlayField(BaseField):
 
 	def printPiece(self):
 		self.clearFallingPiece()
-		self.addPieceToField()
+		self.updateFallingAndField()
 
 	def generatePiece(self):
 		self.last_move_down = time.time()
@@ -113,7 +112,12 @@ class PlayField(BaseField):
 		self.piece = random.choice([T_STRAIGHT, T_SQUARE, T_LEFTL, T_RIGHTL, T_Z, T_S, T_T, T_J])
 		# self.piece = T_STRAIGHT
 		self.piece.reset()
-		self.addPieceToField()
+		self.updateFallingAndField()
+
+	def levelDown(self, start_y : int):
+		for y in range(start_y, 0, -1):
+			self.field[y] = self.field[y -1]
+		self.field[0] = [(BLACK, STILL)] * 10
 
 class HandleKeys():
 	keys = {}
@@ -157,20 +161,75 @@ class HandleKeys():
 				self.keys["UP"] = False
 
 	def makeMoves(self, playField, now):
+		playField.updateFallingAndField()
 		if playField.piece == None or playField.falling == STILL:
 			return
 		if self.keys["DOWN"] and now - self.lastMove["DOWN"] >= 0.1:
+			start_x = playField.piece.position["x"]
+			start_y = playField.piece.position["y"]
+			end_x = min(start_x + len(playField.piece.shape[0]), 10)
+			end_y = min(start_y + len(playField.piece.shape), 20)
+			for y in range(start_y, end_y):
+				for x in range(start_x, end_x):
+					color = playField.piece.shape[y - start_y][x - start_x]
+					if color != BLACK:
+						if y >= 19 or (playField.field[y +1][x][0] != BLACK and playField.field[y +1][x][1] == STILL):
+							self.falling = STILL
+							return
+
 			playField.moveDown()
 			self.lastMove["DOWN"] = now
 		if self.keys["LEFT"] and now - self.lastMove["LEFT"] >= 0.1:
+			start_x = playField.piece.position["x"]
+			start_y = playField.piece.position["y"]
+			end_x = min(start_x + len(playField.piece.shape[0]), 10)
+			end_y = min(start_y + len(playField.piece.shape), 20)
+			for y in range(start_y, end_y):
+				for x in range(start_x, end_x):
+					color = playField.piece.shape[y - start_y][x - start_x]
+					if color != BLACK:
+						if x > 0 and (playField.field[y][x -1][0] != BLACK and playField.field[y][x -1][1] == STILL):
+							self.falling = STILL
+							return
 			playField.piece.moveLeft()
 			self.lastMove["LEFT"] = now
 		if self.keys["RIGHT"] and now - self.lastMove["RIGHT"] >= 0.1:
+			start_x = playField.piece.position["x"]
+			start_y = playField.piece.position["y"]
+			end_x = min(start_x + len(playField.piece.shape[0]), 10)
+			end_y = min(start_y + len(playField.piece.shape), 20)
+			for y in range(start_y, end_y):
+				for x in range(start_x, end_x):
+					color = playField.piece.shape[y - start_y][x - start_x]
+					if color != BLACK:
+						if x < 9 and (playField.field[y][x +1][0] != BLACK and playField.field[y][x +1][1] == STILL):
+							self.falling = STILL
+							return
 			playField.piece.moveRight()
 			self.lastMove["RIGHT"] = now
+
 		if self.keys["UP"] and now - self.lastMove["UP"] >= 0.2:
+			playField.clearFallingPiece()
 			playField.piece.rotate(playField.field)
 			self.lastMove["UP"] = now
+
+def removeLines(playField: PlayField):
+	for y in range(20):
+		remove = True
+		for x in range(10):
+			if playField.field[y][x][0] == BLACK:
+				remove = False
+		if remove:
+			print("removing line")
+			for x in range(10):
+				playField.field[y][x] = (BLACK, STILL)
+			# time.sleep(0.1)
+			# playField.moveDown()
+			# time.sleep(0.1)
+			playField.levelDown(y)
+			time.sleep(0.1)
+			return True
+	return False
 
 def main():
 
@@ -181,17 +240,10 @@ def main():
 	endGame = False
 	while(not endGame):
 
+		removeAnimation = False
+		moved = False
+
 		now = time.time()
-		if playField.falling == FALLING:
-			if now - playField.last_move_down >= 0.5:
-				playField.moveDown()
-				playField.last_move_down = now
-		else:
-			playField.generatePiece()
-
-		playField.printPiece()
-
-		handleKeys.makeMoves(playField, now)
 
 		# register key events
 		for event in pygame.event.get():
@@ -201,8 +253,24 @@ def main():
 			if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
 				handleKeys.updateKeys(event, playField)
 
+		moved = handleKeys.makeMoves(playField, now)
+
+		if not moved and playField.falling == FALLING:
+			if now - playField.last_move_down >= 0.5:
+				playField.moveDown()
+				playField.last_move_down = now
+		else:
+			playField.generatePiece()
+
+		removeAnimation = removeLines(playField)
+
+		playField.printPiece()
+
 		full_screen = pygame.Rect(0, 0, _WINDOW_WIDTH, _WINDOW_HEIGHT)
 		WINDOW.fill(pygame.Color(0, 0, 0), full_screen, 0)
+
+		if removeAnimation:
+			time.sleep(0.08)
 
 		for y in range(0, playField._height):
 			for x in range(0, playField._width):
@@ -212,6 +280,8 @@ def main():
 				pygame.draw.rect(WINDOW, (WHITE_COLOR), rect=rect, width=1)
 
 		time.sleep(0.016)
+		if removeAnimation:
+			time.sleep(0.08)
 		pygame.display.flip()
 
 if __name__ == "__main__":

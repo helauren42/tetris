@@ -12,6 +12,9 @@ class TetrisColor(Enum):
 	PURPLE = 7      # T (T-shape)
 	WHITE = 8
 
+	def __str__(self):
+		return self.name.capitalize()
+
 BLACK, CYAN, BLUE, ORANGE, YELLOW, GREEN, RED, PURPLE, WHITE = (
 	TetrisColor.BLACK, TetrisColor.CYAN, TetrisColor.BLUE, TetrisColor.ORANGE,
 	TetrisColor.YELLOW, TetrisColor.GREEN, TetrisColor.RED,
