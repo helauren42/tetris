@@ -65,8 +65,6 @@ class Tetromino(ABC):
 		if(self.current_rotation >= len(self.shapes)):
 			self.current_rotation = 0
 
-		print(f"current rotation: {self.current_rotation}")
-		print(f"prev rotation: {prev}")
 		curr_shape = self.shapes[self.current_rotation]
 		can_be_done = True
 		start_x = self.position["x"]

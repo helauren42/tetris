@@ -115,10 +115,13 @@ class PlayField(BaseField):
 		self.piece.reset()
 		self.updateFallingAndField()
 
-	def levelDown(self, start_y : int):
-		for y in range(start_y, 0, -1):
+	def levelDown(self):
+		if self.remove_y == None:
+			return
+		for y in range(self.remove_y, 0, -1):
 			self.field[y] = self.field[y -1]
 		self.field[0] = [(BLACK, STILL)] * 10
+		self.remove_y = None
 
 	def fullLine(self):
 		for y in range(20):
@@ -129,15 +132,15 @@ class PlayField(BaseField):
 					break
 			if remove:
 				self.remove_y = y
-				print("remove y: " + str(self.remove_y))
 				return True
 		return False
 
 	def removeLines(self):
+		if self.remove_y == None:
+			return
 		for x in range(10):
 			self.field[self.remove_y][x] = (BLACK, STILL)
-		self.levelDown(self.remove_y)
-		self.remove_y = None
+		# self.levelDown()
 
 	def drawField(self):
 		for y in range(0, self._height):
@@ -222,7 +225,6 @@ class HandleKeys():
 					color = playField.piece.shape[y - start_y][x - start_x]
 					if color != BLACK:
 						if x > 0 and (playField.field[y][x -1][0] != BLACK and playField.field[y][x -1][1] == STILL):
-							self.falling = STILL
 							return
 			playField.piece.moveLeft()
 			self.lastMove["LEFT"] = now
@@ -236,7 +238,6 @@ class HandleKeys():
 					color = playField.piece.shape[y - start_y][x - start_x]
 					if color != BLACK:
 						if x < 9 and (playField.field[y][x +1][0] != BLACK and playField.field[y][x +1][1] == STILL):
-							self.falling = STILL
 							return
 			playField.piece.moveRight()
 			self.lastMove["RIGHT"] = now
@@ -251,10 +252,28 @@ def resetScreen():
 	WINDOW.fill(pygame.Color(0, 0, 0), full_screen, 0)
 
 def animateRemoveLine(playField: PlayField):
+	print("remove line")
 	playField.removeLines()
 	resetScreen()
 	playField.drawField()
+	time.sleep(0.8)
+
 	pygame.display.flip()
+	
+	print("pre sleep1")
+
+	time.sleep(0.8)
+
+	print("post sleep1")
+
+	playField.levelDown()
+	resetScreen()
+	playField.drawField()
+	pygame.display.flip()
+	
+	print("pre sleep2 levelled down")
+	time.sleep(0.8)
+	print("post sleep2")
 
 def main():
 
