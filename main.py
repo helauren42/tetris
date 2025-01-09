@@ -188,27 +188,31 @@ class HandleKeys():
 			if event.key == pygame.K_UP:
 				self.keys["UP"] = False
 		
+	def canMoveDown(self, playField):
+		if playField.falling == STILL:
+			return False
+		start_x = playField.piece.position["x"]
+		start_y = playField.piece.position["y"]
+		end_x = min(start_x + len(playField.piece.shape[0]), 10)
+		end_y = min(start_y + len(playField.piece.shape), 20)
+		for y in range(start_y, end_y):
+			for x in range(start_x, end_x):
+				color = playField.piece.shape[y - start_y][x - start_x]
+				if color != BLACK:
+					if y >= 19 or (playField.field[y +1][x][0] != BLACK and playField.field[y +1][x][1] == STILL):
+						return False
+		return True
+
 	def makeMoves(self, playField, now):
 		playField.updateFallingAndField()
 		if playField.piece == None or playField.falling == STILL:
 			return
 		if self.keys["DOWN"] and now - self.lastMove["DOWN"] >= 0.05:
-			start_x = playField.piece.position["x"]
-			start_y = playField.piece.position["y"]
-			end_x = min(start_x + len(playField.piece.shape[0]), 10)
-			end_y = min(start_y + len(playField.piece.shape), 20)
-			for y in range(start_y, end_y):
-				for x in range(start_x, end_x):
-					color = playField.piece.shape[y - start_y][x - start_x]
-					if color != BLACK:
-						if y >= 19 or (playField.field[y +1][x][0] != BLACK and playField.field[y +1][x][1] == STILL):
-							self.falling = STILL
-							return
-
-			playField.moveDown()
-			self.lastMove["DOWN"] = now
-			playField.last_move_down = now
-		if self.keys["LEFT"] and now - self.lastMove["LEFT"] >= 0.05:
+			if self.canMoveDown(playField):
+				playField.moveDown()
+				self.lastMove["DOWN"] = now
+				playField.last_move_down = now
+		elif self.keys["LEFT"] and now - self.lastMove["LEFT"] >= 0.05:
 			start_x = playField.piece.position["x"]
 			start_y = playField.piece.position["y"]
 			end_x = min(start_x + len(playField.piece.shape[0]), 10)
@@ -222,7 +226,7 @@ class HandleKeys():
 							return
 			playField.piece.moveLeft()
 			self.lastMove["LEFT"] = now
-		if self.keys["RIGHT"] and now - self.lastMove["RIGHT"] >= 0.05:
+		elif self.keys["RIGHT"] and now - self.lastMove["RIGHT"] >= 0.05:
 			start_x = playField.piece.position["x"]
 			start_y = playField.piece.position["y"]
 			end_x = min(start_x + len(playField.piece.shape[0]), 10)
@@ -237,7 +241,7 @@ class HandleKeys():
 			playField.piece.moveRight()
 			self.lastMove["RIGHT"] = now
 
-		if self.keys["UP"] and now - self.lastMove["UP"] >= 0.2:
+		elif self.keys["UP"] and now - self.lastMove["UP"] >= 0.2:
 			playField.clearFallingPiece()
 			playField.piece.rotate(playField.field)
 			self.lastMove["UP"] = now
@@ -261,26 +265,22 @@ def main():
 	endGame = False
 	while(not endGame):
 
-		removeAnimation = False
-		moved = False
-
 		now = time.time()
 
-		# register key events
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				endGame = True
-			# if event.type == pygame.KEYDOWN:
 			if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
 				handleKeys.updateKeys(event, playField)
 
-		moved = handleKeys.makeMoves(playField, now)
+		if handleKeys.makeMoves(playField, now):
+			continue
 
 		if playField.falling == STILL and playField.fullLine():
 			animateRemoveLine(playField)
 			continue
 
-		if not moved and not removeAnimation and playField.falling == FALLING:
+		if playField.falling == FALLING:
 			if now - playField.last_move_down >= 0.5:
 				playField.moveDown()
 				playField.last_move_down = now
