@@ -270,15 +270,16 @@ def animateRemoveLine(playField: PlayField):
 	time.sleep(0.8)
 
 def displayGameOver(playField: PlayField):
+	grey_color = pygame.Color(200, 200, 200)
 	full_screen = pygame.Rect(0, 0, _WINDOW_WIDTH, _WINDOW_HEIGHT)
 	WINDOW.fill(pygame.Color(0, 0, 0), full_screen, 0)
 	playField.drawField()
 	pygame.display.flip()
 	time.sleep(0.2)
 
-	text_surface = pygame.font.Font(None , 60).render("Game", True, tetris_to_pygame_color(WHITE))
+	text_surface = pygame.font.Font(None , 60).render("Game", True, grey_color)
 	WINDOW.blit(text_surface, (150, 320))
-	text_surface = pygame.font.Font(None , 60).render("Over", True, tetris_to_pygame_color(WHITE))
+	text_surface = pygame.font.Font(None , 60).render("Over", True, grey_color)
 	WINDOW.blit(text_surface, (150, 380))
 	pygame.display.flip()
 	time.sleep(0.8)
