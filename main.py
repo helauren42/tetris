@@ -259,21 +259,29 @@ def animateRemoveLine(playField: PlayField):
 	time.sleep(0.8)
 
 	pygame.display.flip()
-	
-	print("pre sleep1")
 
 	time.sleep(0.8)
-
-	print("post sleep1")
 
 	playField.levelDown()
 	resetScreen()
 	playField.drawField()
 	pygame.display.flip()
 	
-	print("pre sleep2 levelled down")
 	time.sleep(0.8)
-	print("post sleep2")
+
+def displayGameOver(playField: PlayField):
+	full_screen = pygame.Rect(0, 0, _WINDOW_WIDTH, _WINDOW_HEIGHT)
+	WINDOW.fill(pygame.Color(0, 0, 0), full_screen, 0)
+	playField.drawField()
+	pygame.display.flip()
+	time.sleep(0.2)
+
+	text_surface = pygame.font.Font(None , 60).render("Game", True, tetris_to_pygame_color(WHITE))
+	WINDOW.blit(text_surface, (150, 320))
+	text_surface = pygame.font.Font(None , 60).render("Over", True, tetris_to_pygame_color(WHITE))
+	WINDOW.blit(text_surface, (150, 380))
+	pygame.display.flip()
+	time.sleep(0.8)
 
 def main():
 
@@ -281,16 +289,20 @@ def main():
 	handleKeys = HandleKeys()
 	logging.basicConfig(filename="tetris.log", level=logging.DEBUG, filemode="w")
 
-	endGame = False
-	while(not endGame):
-
+	closeApp = False
+	gameOver = False
+	while(not closeApp):
 		now = time.time()
 
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
-				endGame = True
+				closeApp = True
 			if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
 				handleKeys.updateKeys(event, playField)
+
+		if gameOver:
+			displayGameOver(playField)
+			continue
 
 		if handleKeys.makeMoves(playField, now):
 			continue
@@ -305,7 +317,8 @@ def main():
 				playField.last_move_down = now
 		else:
 			playField.generatePiece()
-
+			if not handleKeys.canMoveDown(playField):
+				gameOver = True
 		playField.printPiece()
 
 		resetScreen()
