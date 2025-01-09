@@ -159,12 +159,12 @@ class HandleKeys():
 				self.keys["RIGHT"] = False
 			if event.key == pygame.K_UP:
 				self.keys["UP"] = False
-
+		
 	def makeMoves(self, playField, now):
 		playField.updateFallingAndField()
 		if playField.piece == None or playField.falling == STILL:
 			return
-		if self.keys["DOWN"] and now - self.lastMove["DOWN"] >= 0.1:
+		if self.keys["DOWN"] and now - self.lastMove["DOWN"] >= 0.05:
 			start_x = playField.piece.position["x"]
 			start_y = playField.piece.position["y"]
 			end_x = min(start_x + len(playField.piece.shape[0]), 10)
@@ -179,7 +179,8 @@ class HandleKeys():
 
 			playField.moveDown()
 			self.lastMove["DOWN"] = now
-		if self.keys["LEFT"] and now - self.lastMove["LEFT"] >= 0.1:
+			playField.last_move_down = now
+		if self.keys["LEFT"] and now - self.lastMove["LEFT"] >= 0.05:
 			start_x = playField.piece.position["x"]
 			start_y = playField.piece.position["y"]
 			end_x = min(start_x + len(playField.piece.shape[0]), 10)
@@ -193,7 +194,7 @@ class HandleKeys():
 							return
 			playField.piece.moveLeft()
 			self.lastMove["LEFT"] = now
-		if self.keys["RIGHT"] and now - self.lastMove["RIGHT"] >= 0.1:
+		if self.keys["RIGHT"] and now - self.lastMove["RIGHT"] >= 0.05:
 			start_x = playField.piece.position["x"]
 			start_y = playField.piece.position["y"]
 			end_x = min(start_x + len(playField.piece.shape[0]), 10)
@@ -223,13 +224,15 @@ def removeLines(playField: PlayField):
 			print("removing line")
 			for x in range(10):
 				playField.field[y][x] = (BLACK, STILL)
-			# time.sleep(0.1)
+			# time.sleep(0.05)
 			# playField.moveDown()
 			# time.sleep(0.1)
 			playField.levelDown(y)
 			time.sleep(0.1)
 			return True
 	return False
+
+
 
 def main():
 
@@ -255,14 +258,16 @@ def main():
 
 		moved = handleKeys.makeMoves(playField, now)
 
-		if not moved and playField.falling == FALLING:
+		if playField.falling == STILL:
+			removeAnimation = removeLines(playField)
+
+		if not moved and not removeAnimation and playField.falling == FALLING:
 			if now - playField.last_move_down >= 0.5:
 				playField.moveDown()
 				playField.last_move_down = now
 		else:
 			playField.generatePiece()
 
-		removeAnimation = removeLines(playField)
 
 		playField.printPiece()
 
@@ -280,9 +285,9 @@ def main():
 				pygame.draw.rect(WINDOW, (WHITE_COLOR), rect=rect, width=1)
 
 		time.sleep(0.016)
-		if removeAnimation:
-			time.sleep(0.08)
 		pygame.display.flip()
+		if removeAnimation:
+			time.sleep(0.2)
 
 if __name__ == "__main__":
 	main()

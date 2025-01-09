@@ -1,320 +1,792 @@
-INFO:root:shape: Yellow,Yellow,
-Yellow,Yellow,
-
-INFO:root:position: {'x': 2, 'y': 8}
-INFO:root:shape: Yellow,Yellow,
-Yellow,Yellow,
-
-INFO:root:position: {'x': 1, 'y': 8}
-INFO:root:shape: Yellow,Yellow,
-Yellow,Yellow,
-
-INFO:root:position: {'x': 0, 'y': 8}
-INFO:root:shape: Yellow,Yellow,
-Yellow,Yellow,
-
-INFO:root:position: {'x': -1, 'y': 8}
-INFO:root:checkX: 10
-INFO:root:shape: Yellow,Yellow,
-Yellow,Yellow,
-
-INFO:root:position: {'x': -1, 'y': 8}
-INFO:root:checkX: 10
-INFO:root:shape: Blue,Black,Black,
-Blue,Blue,Blue,
-Black,Black,Black,
-
-INFO:root:position: {'x': 2, 'y': 2}
-INFO:root:shape: Blue,Black,Black,
-Blue,Blue,Blue,
-Black,Black,Black,
-
-INFO:root:position: {'x': 1, 'y': 2}
-INFO:root:shape: Blue,Black,Black,
-Blue,Blue,Blue,
-Black,Black,Black,
-
-INFO:root:position: {'x': 0, 'y': 3}
-INFO:root:first_block_x: 1 last_block_x: 3 first_block_y: 3 last_block_y: 6
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 12 last_block_y: 15
 INFO:root:can be done: True
-INFO:root:shape: Black,Blue,Blue,
-Black,Blue,Black,
-Black,Blue,Black,
-
-INFO:root:position: {'x': -1, 'y': 3}
-INFO:root:checkX: 10
-INFO:root:shape: Black,Blue,Blue,
-Black,Blue,Black,
-Black,Blue,Black,
-
-INFO:root:position: {'x': -2, 'y': 3}
-INFO:root:checkX: 11
-INFO:root:shape: Black,Blue,Blue,
-Black,Blue,Black,
-Black,Blue,Black,
-
-INFO:root:position: {'x': -2, 'y': 4}
-INFO:root:checkX: 11
-INFO:root:shape: Black,Blue,Blue,
-Black,Blue,Black,
-Black,Blue,Black,
-
-INFO:root:position: {'x': -2, 'y': 5}
-INFO:root:checkX: 11
-INFO:root:shape: Red,Red,Black,
-Black,Red,Red,
-
-INFO:root:position: {'x': 2, 'y': 1}
-INFO:root:shape: Red,Red,Black,
-Black,Red,Red,
-
-INFO:root:position: {'x': 1, 'y': 2}
-INFO:root:first_block_x: 2 last_block_x: 4 first_block_y: 2 last_block_y: 5
+INFO:root:first_block_x: 3 last_block_x: 6 first_block_y: 13 last_block_y: 15
 INFO:root:can be done: True
-INFO:root:shape: Black,Black,Red,
-Black,Red,Red,
-Black,Red,Black,
-
-INFO:root:position: {'x': 0, 'y': 2}
-INFO:root:shape: Black,Black,Red,
-Black,Red,Red,
-Black,Red,Black,
-
-INFO:root:position: {'x': -1, 'y': 2}
-INFO:root:checkX: 10
-INFO:root:shape: Black,Black,Red,
-Black,Red,Red,
-Black,Red,Black,
-
-INFO:root:position: {'x': -2, 'y': 2}
-INFO:root:checkX: 11
-INFO:root:shape: Black,Black,Red,
-Black,Red,Red,
-Black,Red,Black,
-
-INFO:root:position: {'x': -2, 'y': 3}
-INFO:root:checkX: 11
-INFO:root:shape: Black,Black,Red,
-Black,Red,Red,
-Black,Red,Black,
-
-INFO:root:position: {'x': -2, 'y': 5}
-INFO:root:checkX: 11
-INFO:root:shape: Black,Black,Red,
-Black,Red,Red,
-Black,Red,Black,
-
-INFO:root:position: {'x': -2, 'y': 6}
-INFO:root:checkX: 11
-INFO:root:shape: Black,Black,Red,
-Black,Red,Red,
-Black,Red,Black,
-
-INFO:root:position: {'x': -2, 'y': 7}
-INFO:root:checkX: 11
-INFO:root:shape: Black,Black,Red,
-Black,Red,Red,
-Black,Red,Black,
-
-INFO:root:position: {'x': -2, 'y': 8}
-INFO:root:checkX: 11
-INFO:root:shape: Black,Black,Red,
-Black,Red,Red,
-Black,Red,Black,
-
-INFO:root:position: {'x': -2, 'y': 9}
-INFO:root:checkX: 11
-INFO:root:shape: Black,Black,Red,
-Black,Red,Red,
-Black,Red,Black,
-
-INFO:root:position: {'x': -2, 'y': 11}
-INFO:root:checkX: 11
-INFO:root:shape: Black,Black,Orange,
-Orange,Orange,Orange,
-
-INFO:root:position: {'x': 2, 'y': 0}
-INFO:root:shape: Black,Black,Orange,
-Orange,Orange,Orange,
-
-INFO:root:position: {'x': 1, 'y': 1}
-INFO:root:shape: Black,Black,Orange,
-Orange,Orange,Orange,
-
-INFO:root:position: {'x': 0, 'y': 2}
-INFO:root:shape: Black,Black,Orange,
-Orange,Orange,Orange,
-
-INFO:root:position: {'x': -1, 'y': 2}
-INFO:root:checkX: 10
-INFO:root:first_block_x: 1 last_block_x: 3 first_block_y: 3 last_block_y: 6
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 14 last_block_y: 17
 INFO:root:can be done: True
-INFO:root:shape: Black,Orange,Black,
-Black,Orange,Black,
-Black,Orange,Orange,
-
-INFO:root:position: {'x': -1, 'y': 3}
-INFO:root:checkX: 10
-INFO:root:shape: Black,Orange,Black,
-Black,Orange,Black,
-Black,Orange,Orange,
-
-INFO:root:position: {'x': -2, 'y': 3}
-INFO:root:checkX: 11
-INFO:root:shape: Black,Orange,Black,
-Black,Orange,Black,
-Black,Orange,Orange,
-
-INFO:root:position: {'x': -2, 'y': 4}
-INFO:root:checkX: 11
-INFO:root:shape: Black,Orange,Black,
-Black,Orange,Black,
-Black,Orange,Orange,
-
-INFO:root:position: {'x': -2, 'y': 5}
-INFO:root:checkX: 11
-INFO:root:shape: Black,Orange,Black,
-Black,Orange,Black,
-Black,Orange,Orange,
-
-INFO:root:position: {'x': -2, 'y': 7}
-INFO:root:checkX: 11
-INFO:root:shape: Black,Orange,Black,
-Black,Orange,Black,
-Black,Orange,Orange,
-
-INFO:root:position: {'x': -2, 'y': 8}
-INFO:root:checkX: 11
-INFO:root:shape: Black,Green,Green,
-Green,Green,Black,
-
-INFO:root:position: {'x': 2, 'y': 0}
-INFO:root:shape: Black,Green,Green,
-Green,Green,Black,
-
-INFO:root:position: {'x': 1, 'y': 1}
-INFO:root:shape: Black,Green,Green,
-Green,Green,Black,
-
-INFO:root:position: {'x': 4, 'y': 10}
-INFO:root:shape: Black,Green,Green,
-Green,Green,Black,
-
-INFO:root:position: {'x': 3, 'y': 11}
-INFO:root:shape: Black,Green,Green,
-Green,Green,Black,
-
-INFO:root:position: {'x': 2, 'y': 12}
-INFO:root:shape: Black,Green,Green,
-Green,Green,Black,
-
-INFO:root:position: {'x': 1, 'y': 13}
-INFO:root:shape: Blue,Black,Black,
-Blue,Blue,Blue,
-
-INFO:root:position: {'x': 2, 'y': 0}
-INFO:root:shape: Blue,Black,Black,
-Blue,Blue,Blue,
-
-INFO:root:position: {'x': 1, 'y': 1}
-INFO:root:shape: Blue,Black,Black,
-Blue,Blue,Blue,
-
-INFO:root:position: {'x': 0, 'y': 2}
-INFO:root:shape: Blue,Black,Black,
-Blue,Blue,Blue,
-
-INFO:root:position: {'x': 4, 'y': 9}
-INFO:root:shape: Blue,Black,Black,
-Blue,Blue,Blue,
-
-INFO:root:position: {'x': 3, 'y': 10}
-INFO:root:shape: Blue,Black,Black,
-Blue,Blue,Blue,
-
-INFO:root:position: {'x': 2, 'y': 12}
-INFO:root:shape: Blue,Black,Black,
-Blue,Blue,Blue,
-
-INFO:root:position: {'x': 1, 'y': 14}
-INFO:root:shape: Black,Black,Black,Black,
-Cyan,Cyan,Cyan,Cyan,
-
-INFO:root:position: {'x': 2, 'y': 1}
-INFO:root:shape: Black,Black,Black,Black,
-Cyan,Cyan,Cyan,Cyan,
-
-INFO:root:position: {'x': 1, 'y': 2}
-INFO:root:shape: Black,Black,Black,Black,
-Cyan,Cyan,Cyan,Cyan,
-
-INFO:root:position: {'x': 0, 'y': 3}
-INFO:root:shape: Black,Black,Black,Black,
-Cyan,Cyan,Cyan,Cyan,
-
-INFO:root:position: {'x': 2, 'y': 10}
-INFO:root:shape: Black,Purple,Black,
-Purple,Purple,Purple,
-
-INFO:root:position: {'x': 2, 'y': 1}
-INFO:root:shape: Black,Purple,Black,
-Purple,Purple,Purple,
-
-INFO:root:position: {'x': 1, 'y': 2}
-INFO:root:shape: Black,Purple,Black,
-Purple,Purple,Purple,
-
-INFO:root:position: {'x': 0, 'y': 2}
-INFO:root:first_block_x: 1 last_block_x: 3 first_block_y: 4 last_block_y: 7
+INFO:root:first_block_x: 3 last_block_x: 6 first_block_y: 15 last_block_y: 17
+INFO:root:can be done: True
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 4 last_block_y: 7
+INFO:root:can be done: True
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 3 last_block_y: 6
 INFO:root:can be done: True
 INFO:root:shape: Black,Purple,Black,
 Black,Purple,Purple,
 Black,Purple,Black,
 
-INFO:root:position: {'x': -1, 'y': 4}
+INFO:root:position: {'x': 2, 'y': 4}
+INFO:root:shape: Black,Purple,Black,
+Black,Purple,Purple,
+Black,Purple,Black,
+
+INFO:root:position: {'x': 1, 'y': 4}
+INFO:root:shape: Black,Purple,Black,
+Black,Purple,Purple,
+Black,Purple,Black,
+
+INFO:root:position: {'x': 0, 'y': 4}
+INFO:root:first_block_x: 0 last_block_x: 3 first_block_y: 5 last_block_y: 7
+INFO:root:can be done: True
+INFO:root:first_block_x: 1 last_block_x: 3 first_block_y: 6 last_block_y: 9
+INFO:root:can be done: True
+INFO:root:first_block_x: 0 last_block_x: 3 first_block_y: 7 last_block_y: 9
+INFO:root:can be done: True
+INFO:root:shape: Black,Purple,Black,
+Purple,Purple,Purple,
+
+INFO:root:position: {'x': 1, 'y': 11}
+INFO:root:shape: Black,Purple,Black,
+Purple,Purple,Purple,
+
+INFO:root:position: {'x': 0, 'y': 16}
+INFO:root:shape: Black,Purple,Black,
+Purple,Purple,Purple,
+
+INFO:root:position: {'x': -1, 'y': 16}
 INFO:root:checkX: 10
-INFO:root:shape: Black,Black,Orange,
-Orange,Orange,Orange,
+INFO:root:first_block_x: 4 last_block_x: 7 first_block_y: 3 last_block_y: 7
+INFO:root:can be done: True
+INFO:root:shape: Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
 
-INFO:root:position: {'x': 2, 'y': 0}
-INFO:root:shape: Black,Black,Orange,
-Orange,Orange,Orange,
+INFO:root:position: {'x': 2, 'y': 6}
+INFO:root:shape: Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
 
-INFO:root:position: {'x': 1, 'y': 1}
-INFO:root:shape: Black,Black,Orange,
-Orange,Orange,Orange,
+INFO:root:position: {'x': 1, 'y': 6}
+INFO:root:shape: Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+
+INFO:root:position: {'x': 2, 'y': 8}
+INFO:root:first_block_x: 4 last_block_x: 7 first_block_y: 3 last_block_y: 7
+INFO:root:can be done: True
+INFO:root:checkX: 2
+INFO:root:checkX: 2
+INFO:root:checkX: 2
+INFO:root:checkX: 2
+INFO:root:shape: Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+
+INFO:root:position: {'x': 6, 'y': 9}
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 1 last_block_y: 4
+INFO:root:can be done: True
+INFO:root:first_block_x: 3 last_block_x: 6 first_block_y: 1 last_block_y: 3
+INFO:root:can be done: True
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 1 last_block_y: 4
+INFO:root:can be done: True
+INFO:root:shape: Black,Blue,Blue,
+Black,Blue,Black,
+Black,Blue,Black,
+
+INFO:root:position: {'x': 6, 'y': 10}
+INFO:root:shape: Black,Blue,Blue,
+Black,Blue,Black,
+Black,Blue,Black,
+
+INFO:root:position: {'x': 5, 'y': 10}
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 1 last_block_y: 4
+INFO:root:can be done: True
+INFO:root:first_block_x: 3 last_block_x: 6 first_block_y: 2 last_block_y: 4
+INFO:root:can be done: True
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 3 last_block_y: 6
+INFO:root:can be done: True
+INFO:root:shape: Black,Orange,Orange,
+Black,Black,Orange,
+Black,Black,Orange,
+
+INFO:root:position: {'x': 2, 'y': 6}
+INFO:root:shape: Black,Orange,Orange,
+Black,Black,Orange,
+Black,Black,Orange,
+
+INFO:root:position: {'x': 1, 'y': 6}
+INFO:root:shape: Black,Orange,Orange,
+Black,Black,Orange,
+Black,Black,Orange,
+
+INFO:root:position: {'x': 0, 'y': 6}
+INFO:root:first_block_x: 0 last_block_x: 3 first_block_y: 9 last_block_y: 11
+INFO:root:can be done: True
+INFO:root:first_block_x: 1 last_block_x: 3 first_block_y: 10 last_block_y: 13
+INFO:root:can be done: True
+INFO:root:first_block_x: 0 last_block_x: 3 first_block_y: 11 last_block_y: 13
+INFO:root:can be done: True
+INFO:root:shape: Orange,Orange,Orange,
+Orange,Black,Black,
+
+INFO:root:position: {'x': -1, 'y': 11}
+INFO:root:checkX: 10
+INFO:root:shape: Orange,Orange,Orange,
+Orange,Black,Black,
+
+INFO:root:position: {'x': -1, 'y': 12}
+INFO:root:checkX: 10
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 2 last_block_y: 5
+INFO:root:can be done: True
+INFO:root:first_block_x: 3 last_block_x: 6 first_block_y: 4 last_block_y: 6
+INFO:root:can be done: True
+INFO:root:shape: Black,Black,Black,
+Blue,Blue,Blue,
+Black,Black,Blue,
+
+INFO:root:position: {'x': 2, 'y': 4}
+INFO:root:shape: Black,Black,Black,
+Blue,Blue,Blue,
+Black,Black,Blue,
+
+INFO:root:position: {'x': 1, 'y': 4}
+INFO:root:shape: Black,Black,Black,
+Blue,Blue,Blue,
+Black,Black,Blue,
+
+INFO:root:position: {'x': 0, 'y': 6}
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 9 last_block_y: 12
+INFO:root:can be done: True
+INFO:root:first_block_x: 3 last_block_x: 6 first_block_y: 10 last_block_y: 12
+INFO:root:can be done: True
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 11 last_block_y: 14
+INFO:root:can be done: True
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 1 last_block_y: 4
+INFO:root:can be done: True
+INFO:root:first_block_x: 3 last_block_x: 6 first_block_y: 1 last_block_y: 3
+INFO:root:can be done: True
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 2 last_block_y: 5
+INFO:root:can be done: True
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 3 last_block_y: 6
+INFO:root:can be done: True
+INFO:root:shape: Black,Black,Red,
+Black,Red,Red,
+Black,Red,Black,
+
+INFO:root:position: {'x': 2, 'y': 3}
+INFO:root:shape: Black,Black,Red,
+Black,Red,Red,
+Black,Red,Black,
+
+INFO:root:position: {'x': 1, 'y': 4}
+INFO:root:first_block_x: 1 last_block_x: 4 first_block_y: 5 last_block_y: 7
+INFO:root:can be done: True
+INFO:root:first_block_x: 2 last_block_x: 4 first_block_y: 10 last_block_y: 13
+INFO:root:can be done: True
+INFO:root:shape: Blue,Black,Black,
+Blue,Blue,Blue,
+
+INFO:root:position: {'x': 2, 'y': 2}
+INFO:root:shape: Blue,Black,Black,
+Blue,Blue,Blue,
+
+INFO:root:position: {'x': 1, 'y': 2}
+INFO:root:shape: Blue,Black,Black,
+Blue,Blue,Blue,
 
 INFO:root:position: {'x': 0, 'y': 2}
-INFO:root:shape: Black,Black,Orange,
-Orange,Orange,Orange,
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 1 last_block_y: 4
+INFO:root:can be done: True
+INFO:root:shape: Black,Blue,Blue,
+Black,Blue,Black,
+Black,Blue,Black,
+
+INFO:root:position: {'x': 2, 'y': 2}
+INFO:root:shape: Black,Blue,Blue,
+Black,Blue,Black,
+Black,Blue,Black,
+
+INFO:root:position: {'x': 1, 'y': 2}
+INFO:root:first_block_x: 1 last_block_x: 4 first_block_y: 2 last_block_y: 4
+INFO:root:can be done: True
+INFO:root:first_block_x: 7 last_block_x: 9 first_block_y: 3 last_block_y: 6
+INFO:root:can be done: True
+INFO:root:shape: Black,Purple,Black,
+Purple,Purple,Purple,
+
+INFO:root:position: {'x': 2, 'y': 4}
+INFO:root:shape: Black,Purple,Black,
+Purple,Purple,Purple,
+
+INFO:root:position: {'x': 1, 'y': 4}
+INFO:root:shape: Black,Purple,Black,
+Purple,Purple,Purple,
+
+INFO:root:position: {'x': 0, 'y': 5}
+INFO:root:shape: Black,Purple,Black,
+Purple,Purple,Purple,
+
+INFO:root:position: {'x': -1, 'y': 5}
+INFO:root:checkX: 10
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 1 last_block_y: 4
+INFO:root:can be done: True
+INFO:root:first_block_x: 3 last_block_x: 6 first_block_y: 2 last_block_y: 4
+INFO:root:can be done: True
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 12 last_block_y: 15
+INFO:root:can be done: True
+INFO:root:shape: Black,Black,Black,Black,
+Cyan,Cyan,Cyan,Cyan,
+
+INFO:root:position: {'x': 2, 'y': 0}
+INFO:root:shape: Black,Black,Black,Black,
+Cyan,Cyan,Cyan,Cyan,
+
+INFO:root:position: {'x': 1, 'y': 0}
+INFO:root:first_block_x: 2 last_block_x: 5 first_block_y: 2 last_block_y: 6
+INFO:root:can be done: True
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:first_block_x: 8 last_block_x: 10 first_block_y: 4 last_block_y: 7
+INFO:root:can be done: True
+INFO:root:first_block_x: 7 last_block_x: 10 first_block_y: 5 last_block_y: 7
+INFO:root:can be done: True
+INFO:root:first_block_x: 8 last_block_x: 10 first_block_y: 5 last_block_y: 8
+INFO:root:can be done: True
+INFO:root:first_block_x: 7 last_block_x: 10 first_block_y: 6 last_block_y: 8
+INFO:root:can be done: True
+INFO:root:first_block_x: 8 last_block_x: 10 first_block_y: 7 last_block_y: 10
+INFO:root:can be done: True
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 1 last_block_y: 4
+INFO:root:can be done: True
+INFO:root:first_block_x: 3 last_block_x: 6 first_block_y: 1 last_block_y: 3
+INFO:root:can be done: True
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 3 last_block_y: 6
+INFO:root:can be done: True
+INFO:root:shape: Black,Orange,Orange,
+Black,Black,Orange,
+Black,Black,Orange,
+
+INFO:root:position: {'x': 2, 'y': 4}
+INFO:root:shape: Black,Orange,Orange,
+Black,Black,Orange,
+Black,Black,Orange,
+
+INFO:root:position: {'x': 1, 'y': 4}
+INFO:root:shape: Black,Orange,Orange,
+Black,Black,Orange,
+Black,Black,Orange,
+
+INFO:root:position: {'x': 0, 'y': 4}
+INFO:root:shape: Black,Orange,Orange,
+Black,Black,Orange,
+Black,Black,Orange,
+
+INFO:root:position: {'x': -1, 'y': 4}
+INFO:root:checkX: 10
+INFO:root:shape: Black,Orange,Orange,
+Black,Black,Orange,
+Black,Black,Orange,
+
+INFO:root:position: {'x': -2, 'y': 4}
+INFO:root:checkX: 11
+INFO:root:first_block_x: -1 last_block_x: 2 first_block_y: 5 last_block_y: 7
+INFO:root:CANT ROTATE: first_block_x: -1 last_block_x: 2 first_block_y: 5 last_block_y: 7
+INFO:root:curr_shape: [[<TetrisColor.BLACK: 0>, <TetrisColor.BLACK: 0>, <TetrisColor.ORANGE: 3>], [<TetrisColor.ORANGE: 3>, <TetrisColor.ORANGE: 3>, <TetrisColor.ORANGE: 3>]]
+INFO:root:first_block_x: -1 last_block_x: 2 first_block_y: 6 last_block_y: 8
+INFO:root:CANT ROTATE: first_block_x: -1 last_block_x: 2 first_block_y: 6 last_block_y: 8
+INFO:root:curr_shape: [[<TetrisColor.BLACK: 0>, <TetrisColor.BLACK: 0>, <TetrisColor.ORANGE: 3>], [<TetrisColor.ORANGE: 3>, <TetrisColor.ORANGE: 3>, <TetrisColor.ORANGE: 3>]]
+INFO:root:first_block_x: -1 last_block_x: 2 first_block_y: 6 last_block_y: 8
+INFO:root:CANT ROTATE: first_block_x: -1 last_block_x: 2 first_block_y: 6 last_block_y: 8
+INFO:root:curr_shape: [[<TetrisColor.BLACK: 0>, <TetrisColor.BLACK: 0>, <TetrisColor.ORANGE: 3>], [<TetrisColor.ORANGE: 3>, <TetrisColor.ORANGE: 3>, <TetrisColor.ORANGE: 3>]]
+INFO:root:first_block_x: 1 last_block_x: 4 first_block_y: 8 last_block_y: 10
+INFO:root:can be done: True
+INFO:root:first_block_x: 2 last_block_x: 4 first_block_y: 9 last_block_y: 12
+INFO:root:can be done: True
+INFO:root:first_block_x: 1 last_block_x: 4 first_block_y: 10 last_block_y: 12
+INFO:root:can be done: True
+INFO:root:shape: Orange,Orange,Orange,
+Orange,Black,Black,
+
+INFO:root:position: {'x': 0, 'y': 10}
+INFO:root:shape: Orange,Orange,Orange,
+Orange,Black,Black,
+
+INFO:root:position: {'x': -1, 'y': 10}
+INFO:root:checkX: 10
+INFO:root:first_block_x: 7 last_block_x: 9 first_block_y: 4 last_block_y: 7
+INFO:root:can be done: True
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 5 last_block_y: 8
+INFO:root:can be done: True
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 5 last_block_y: 8
+INFO:root:can be done: True
+INFO:root:first_block_x: 3 last_block_x: 6 first_block_y: 6 last_block_y: 8
+INFO:root:can be done: True
+INFO:root:shape: Orange,Orange,Orange,
+Orange,Black,Black,
+
+INFO:root:position: {'x': 2, 'y': 6}
+INFO:root:shape: Orange,Orange,Orange,
+Orange,Black,Black,
+
+INFO:root:position: {'x': 1, 'y': 7}
+INFO:root:shape: Orange,Orange,Orange,
+Orange,Black,Black,
+
+INFO:root:position: {'x': 0, 'y': 7}
+INFO:root:shape: Orange,Orange,Orange,
+Orange,Black,Black,
+
+INFO:root:position: {'x': -1, 'y': 7}
+INFO:root:checkX: 10
+INFO:root:shape: Orange,Orange,Orange,
+Orange,Black,Black,
+
+INFO:root:position: {'x': -1, 'y': 7}
+INFO:root:checkX: 10
+INFO:root:shape: Orange,Orange,Orange,
+Orange,Black,Black,
+
+INFO:root:position: {'x': -1, 'y': 7}
+INFO:root:checkX: 10
+INFO:root:first_block_x: 1 last_block_x: 3 first_block_y: 7 last_block_y: 10
+INFO:root:can be done: True
+INFO:root:first_block_x: 0 last_block_x: 3 first_block_y: 8 last_block_y: 10
+INFO:root:can be done: True
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 4 last_block_y: 7
+INFO:root:can be done: True
+INFO:root:first_block_x: 3 last_block_x: 6 first_block_y: 5 last_block_y: 7
+INFO:root:can be done: True
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 1 last_block_y: 4
+INFO:root:can be done: True
+INFO:root:first_block_x: 3 last_block_x: 6 first_block_y: 2 last_block_y: 4
+INFO:root:can be done: True
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 3 last_block_y: 6
+INFO:root:can be done: True
+INFO:root:shape: Black,Black,Red,
+Black,Red,Red,
+Black,Red,Black,
+
+INFO:root:position: {'x': 2, 'y': 4}
+INFO:root:shape: Black,Black,Red,
+Black,Red,Red,
+Black,Red,Black,
+
+INFO:root:position: {'x': 1, 'y': 4}
+INFO:root:shape: Black,Black,Red,
+Black,Red,Red,
+Black,Red,Black,
+
+INFO:root:position: {'x': 0, 'y': 7}
+INFO:root:shape: Black,Black,Red,
+Black,Red,Red,
+Black,Red,Black,
+
+INFO:root:position: {'x': -1, 'y': 7}
+INFO:root:checkX: 10
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 2 last_block_y: 5
+INFO:root:can be done: True
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:first_block_x: 7 last_block_x: 10 first_block_y: 3 last_block_y: 5
+INFO:root:can be done: True
+INFO:root:first_block_x: 8 last_block_x: 10 first_block_y: 4 last_block_y: 7
+INFO:root:can be done: True
+INFO:root:shape: Black,Black,Purple,
+Black,Purple,Purple,
+Black,Black,Purple,
+
+INFO:root:position: {'x': 6, 'y': 5}
+INFO:root:first_block_x: 6 last_block_x: 9 first_block_y: 6 last_block_y: 8
+INFO:root:can be done: True
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 1 last_block_y: 4
+INFO:root:can be done: True
+INFO:root:shape: Black,Blue,Blue,
+Black,Blue,Black,
+Black,Blue,Black,
+
+INFO:root:position: {'x': 2, 'y': 2}
+INFO:root:shape: Black,Blue,Blue,
+Black,Blue,Black,
+Black,Blue,Black,
+
+INFO:root:position: {'x': 1, 'y': 2}
+INFO:root:shape: Black,Blue,Blue,
+Black,Blue,Black,
+Black,Blue,Black,
+
+INFO:root:position: {'x': 0, 'y': 2}
+INFO:root:shape: Black,Blue,Blue,
+Black,Blue,Black,
+Black,Blue,Black,
 
 INFO:root:position: {'x': -1, 'y': 3}
 INFO:root:checkX: 10
-INFO:root:shape: Red,Red,Black,
-Black,Red,Red,
+INFO:root:shape: Black,Blue,Blue,
+Black,Blue,Black,
+Black,Blue,Black,
 
-INFO:root:position: {'x': 6, 'y': 3}
-INFO:root:shape: Red,Red,Black,
-Black,Red,Red,
+INFO:root:position: {'x': -2, 'y': 3}
+INFO:root:checkX: 11
+INFO:root:first_block_x: 4 last_block_x: 7 first_block_y: 2 last_block_y: 6
+INFO:root:can be done: True
+INFO:root:checkX: 2
+INFO:root:checkX: 2
+INFO:root:checkX: 2
+INFO:root:checkX: 2
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:checkX: 0
+INFO:root:checkX: 0
+INFO:root:checkX: 0
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 1 last_block_y: 4
+INFO:root:can be done: True
+INFO:root:first_block_x: 8 last_block_x: 10 first_block_y: 3 last_block_y: 6
+INFO:root:can be done: True
+INFO:root:first_block_x: 7 last_block_x: 10 first_block_y: 4 last_block_y: 6
+INFO:root:can be done: True
+INFO:root:first_block_x: 7 last_block_x: 10 first_block_y: 4 last_block_y: 7
+INFO:root:can be done: True
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:checkX: 0
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
 
-INFO:root:position: {'x': 5, 'y': 4}
-INFO:root:shape: Red,Red,Black,
-Black,Red,Red,
+INFO:root:position: {'x': 2, 'y': 3}
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
 
-INFO:root:position: {'x': 4, 'y': 8}
-INFO:root:shape: Red,Red,Black,
-Black,Red,Red,
+INFO:root:position: {'x': 1, 'y': 3}
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
 
-INFO:root:position: {'x': 3, 'y': 9}
-INFO:root:shape: Red,Red,Black,
-Black,Red,Red,
+INFO:root:position: {'x': 0, 'y': 3}
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
 
-INFO:root:position: {'x': 2, 'y': 10}
+INFO:root:position: {'x': -1, 'y': 3}
+INFO:root:checkX: 10
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
+
+INFO:root:position: {'x': -1, 'y': 3}
+INFO:root:checkX: 10
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 2 last_block_y: 5
+INFO:root:can be done: True
+INFO:root:shape: Black,Green,Black,
+Black,Green,Green,
+Black,Black,Green,
+
+INFO:root:position: {'x': 2, 'y': 4}
+INFO:root:shape: Black,Green,Black,
+Black,Green,Green,
+Black,Black,Green,
+
+INFO:root:position: {'x': 1, 'y': 4}
+INFO:root:shape: Black,Green,Black,
+Black,Green,Green,
+Black,Black,Green,
+
+INFO:root:position: {'x': 0, 'y': 4}
+INFO:root:shape: Black,Green,Black,
+Black,Green,Green,
+Black,Black,Green,
+
+INFO:root:position: {'x': -1, 'y': 4}
+INFO:root:checkX: 10
+INFO:root:first_block_x: -1 last_block_x: 2 first_block_y: 5 last_block_y: 7
+INFO:root:CANT ROTATE: first_block_x: -1 last_block_x: 2 first_block_y: 5 last_block_y: 7
+INFO:root:curr_shape: [[<TetrisColor.BLACK: 0>, <TetrisColor.GREEN: 5>, <TetrisColor.GREEN: 5>], [<TetrisColor.GREEN: 5>, <TetrisColor.GREEN: 5>, <TetrisColor.BLACK: 0>]]
+INFO:root:first_block_x: 3 last_block_x: 6 first_block_y: 7 last_block_y: 9
+INFO:root:can be done: True
+INFO:root:checkX: 1
+INFO:root:checkX: 1
 INFO:root:shape: Black,Green,Green,
 Green,Green,Black,
 
-INFO:root:position: {'x': 2, 'y': 0}
+INFO:root:position: {'x': 6, 'y': 10}
 INFO:root:shape: Black,Green,Green,
 Green,Green,Black,
+
+INFO:root:position: {'x': 5, 'y': 10}
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 2 last_block_y: 5
+INFO:root:can be done: True
+INFO:root:shape: Black,Orange,Black,
+Black,Orange,Black,
+Black,Orange,Orange,
+
+INFO:root:position: {'x': 2, 'y': 3}
+INFO:root:shape: Black,Orange,Black,
+Black,Orange,Black,
+Black,Orange,Orange,
+
+INFO:root:position: {'x': 1, 'y': 3}
+INFO:root:first_block_x: 1 last_block_x: 4 first_block_y: 3 last_block_y: 5
+INFO:root:can be done: True
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 2 last_block_y: 5
+INFO:root:can be done: True
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
+
+INFO:root:position: {'x': 2, 'y': 4}
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
+
+INFO:root:position: {'x': 1, 'y': 4}
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
+
+INFO:root:position: {'x': 2, 'y': 1}
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
 
 INFO:root:position: {'x': 1, 'y': 1}
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
+
+INFO:root:position: {'x': 0, 'y': 1}
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
+
+INFO:root:position: {'x': -1, 'y': 2}
+INFO:root:checkX: 10
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
+
+INFO:root:position: {'x': -1, 'y': 2}
+INFO:root:checkX: 10
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 2 last_block_y: 5
+INFO:root:can be done: True
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 1 last_block_y: 4
+INFO:root:can be done: True
+INFO:root:shape: Black,Blue,Blue,
+Black,Blue,Black,
+Black,Blue,Black,
+
+INFO:root:position: {'x': 2, 'y': 2}
+INFO:root:shape: Black,Blue,Blue,
+Black,Blue,Black,
+Black,Blue,Black,
+
+INFO:root:position: {'x': 1, 'y': 2}
+INFO:root:first_block_x: 4 last_block_x: 7 first_block_y: 2 last_block_y: 6
+INFO:root:can be done: True
+INFO:root:shape: Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+
+INFO:root:position: {'x': 2, 'y': 2}
+INFO:root:shape: Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+
+INFO:root:position: {'x': 1, 'y': 2}
+INFO:root:shape: Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+
+INFO:root:position: {'x': 0, 'y': 2}
+INFO:root:shape: Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+
+INFO:root:position: {'x': -1, 'y': 3}
+INFO:root:checkX: 10
+INFO:root:first_block_x: 4 last_block_x: 7 first_block_y: 1 last_block_y: 5
+INFO:root:can be done: True
+INFO:root:shape: Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+
+INFO:root:position: {'x': 2, 'y': 1}
+INFO:root:shape: Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+
+INFO:root:position: {'x': 1, 'y': 2}
+INFO:root:shape: Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+Black,Cyan,Black,Black,
+
+INFO:root:position: {'x': 0, 'y': 2}
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 1 last_block_y: 4
+INFO:root:can be done: True
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
+
+INFO:root:position: {'x': 2, 'y': 2}
+INFO:root:first_block_x: 4 last_block_x: 7 first_block_y: 1 last_block_y: 5
+INFO:root:can be done: True
+INFO:root:checkX: 2
+INFO:root:checkX: 2
+INFO:root:checkX: 2
+INFO:root:checkX: 2
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:checkX: 0
+INFO:root:first_block_x: 6 last_block_x: 8 first_block_y: 2 last_block_y: 5
+INFO:root:can be done: True
+INFO:root:shape: Black,Black,Red,
+Black,Red,Red,
+Black,Red,Black,
+
+INFO:root:position: {'x': 4, 'y': 3}
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 2 last_block_y: 5
+INFO:root:can be done: True
+INFO:root:first_block_x: 3 last_block_x: 6 first_block_y: 4 last_block_y: 6
+INFO:root:can be done: True
+INFO:root:first_block_x: 5 last_block_x: 8 first_block_y: 4 last_block_y: 7
+INFO:root:can be done: True
+INFO:root:first_block_x: 5 last_block_x: 8 first_block_y: 5 last_block_y: 8
+INFO:root:can be done: True
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:checkX: 1
+INFO:root:first_block_x: 8 last_block_x: 10 first_block_y: 6 last_block_y: 9
+INFO:root:can be done: True
+INFO:root:first_block_x: 7 last_block_x: 10 first_block_y: 8 last_block_y: 10
+INFO:root:
+
+tetronimo can't be rotated: Black,Blue,Blue,
+Black,Blue,Black,
+Black,Blue,Black,
+
+INFO:root:x: 2 y: 2
+INFO:root:field[9][9]: (<TetrisColor.CYAN: 1>, <Falling.STILL: 0>)
+INFO:root:field: Black Black Black Black Black Black Black Black Black Black
+Black Black Black Black Black Black Black Black Black Black
+Black Black Black Black Black Black Black Black Black Black
+Black Black Black Black Black Black Black Black Black Black
+Black Black Black Black Black Black Black Black Black Black
+Black Black Black Black Black Black Black Black Black Black
+Black Black Black Black Black Black Black Black Black Black
+Black Black Black Black Black Black Black Black Black Black
+Black Black Black Black Black Black Black Black Black Black
+Cyan Cyan Black Black Black Black Red Black Black Cyan
+Cyan Cyan Yellow Yellow Black Red Red Black Black Cyan
+Yellow Yellow Blue Yellow Yellow Green Green Black Blue Blue
+Yellow Yellow Orange Orange Orange Orange Black Black Blue Blue
+Yellow Yellow Orange Yellow Yellow Orange Black Black Blue Blue
+Orange Orange Orange Cyan Black Orange Blue Red Red Cyan
+Orange Orange Orange Cyan Black Orange Blue Red Green Cyan
+Orange Purple Black Cyan Black Red Black Green Green Green
+Purple Purple Purple Cyan Red Red Black Green Green Green
+Blue Blue Blue Blue Black Blue Blue Cyan Green Orange
+Purple Purple Purple Cyan Black Red Red Purple Purple Purple
+INFO:root:can be done: False
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 1 last_block_y: 4
+INFO:root:can be done: True
+INFO:root:shape: Black,Green,Black,
+Black,Green,Green,
+Black,Black,Green,
+
+INFO:root:position: {'x': 2, 'y': 4}
+INFO:root:shape: Black,Green,Black,
+Black,Green,Green,
+Black,Black,Green,
+
+INFO:root:position: {'x': 1, 'y': 4}
+INFO:root:shape: Black,Green,Black,
+Black,Green,Green,
+Black,Black,Green,
+
+INFO:root:position: {'x': 2, 'y': 6}
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 2 last_block_y: 5
+INFO:root:can be done: True
+INFO:root:first_block_x: 3 last_block_x: 6 first_block_y: 2 last_block_y: 4
+INFO:root:can be done: True
+INFO:root:shape: Purple,Purple,Purple,
+Black,Purple,Black,
+
+INFO:root:position: {'x': 4, 'y': 5}
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
+
+INFO:root:position: {'x': 2, 'y': 1}
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
+
+INFO:root:position: {'x': 1, 'y': 1}
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
+
+INFO:root:position: {'x': 0, 'y': 2}
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
+
+INFO:root:position: {'x': -1, 'y': 2}
+INFO:root:checkX: 10
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
+
+INFO:root:position: {'x': -1, 'y': 2}
+INFO:root:checkX: 10
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 1 last_block_y: 4
+INFO:root:can be done: True
+INFO:root:shape: Black,Blue,Blue,
+Black,Blue,Black,
+Black,Blue,Black,
+
+INFO:root:position: {'x': 2, 'y': 2}
+INFO:root:shape: Black,Blue,Blue,
+Black,Blue,Black,
+Black,Blue,Black,
+
+INFO:root:position: {'x': 1, 'y': 3}
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
+
+INFO:root:position: {'x': 2, 'y': 1}
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
+
+INFO:root:position: {'x': 1, 'y': 1}
+INFO:root:shape: Yellow,Yellow,
+Yellow,Yellow,
+
+INFO:root:position: {'x': 0, 'y': 1}
+INFO:root:shape: Black,Purple,Black,
+Purple,Purple,Purple,
+
+INFO:root:position: {'x': 2, 'y': 1}
+INFO:root:shape: Black,Purple,Black,
+Purple,Purple,Purple,
+
+INFO:root:position: {'x': 1, 'y': 1}
+INFO:root:first_block_x: 4 last_block_x: 6 first_block_y: 1 last_block_y: 4
+INFO:root:can be done: True
+INFO:root:shape: Black,Green,Black,
+Black,Green,Green,
+Black,Black,Green,
+
+INFO:root:position: {'x': 2, 'y': 1}
+INFO:root:shape: Black,Green,Black,
+Black,Green,Green,
+Black,Black,Green,
+
+INFO:root:position: {'x': 1, 'y': 2}
+INFO:root:shape: Black,Purple,Black,
+Purple,Purple,Purple,
+
+INFO:root:position: {'x': 2, 'y': 0}
