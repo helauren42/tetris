@@ -88,6 +88,7 @@ class PlayField(BaseField):
 	def __init__(self):
 		self.last_move_down = 0
 		self.falling = STILL
+		self.remove_y : Optional[int] = None
 		super().__init__()
 
 	def getColor(self, x: int, y: int):
@@ -118,6 +119,33 @@ class PlayField(BaseField):
 		for y in range(start_y, 0, -1):
 			self.field[y] = self.field[y -1]
 		self.field[0] = [(BLACK, STILL)] * 10
+
+	def fullLine(self):
+		for y in range(20):
+			remove = True
+			for x in range(10):
+				if self.field[y][x][0] == BLACK:
+					remove = False
+					break
+			if remove:
+				self.remove_y = y
+				print("remove y: " + str(self.remove_y))
+				return True
+		return False
+
+	def removeLines(self):
+		for x in range(10):
+			self.field[self.remove_y][x] = (BLACK, STILL)
+		self.levelDown(self.remove_y)
+		self.remove_y = None
+
+	def drawField(self):
+		for y in range(0, self._height):
+			for x in range(0, self._width):
+				rect = pygame.Rect(x * BLOCK_LEN, y * BLOCK_LEN, BLOCK_LEN, BLOCK_LEN)
+				block_color = tetris_to_pygame_color(self.getColor(x, y)[0])
+				pygame.draw.rect(WINDOW, (block_color), rect=rect)
+				pygame.draw.rect(WINDOW, (WHITE_COLOR), rect=rect, width=1)
 
 class HandleKeys():
 	keys = {}
@@ -214,25 +242,15 @@ class HandleKeys():
 			playField.piece.rotate(playField.field)
 			self.lastMove["UP"] = now
 
-def removeLines(playField: PlayField):
-	for y in range(20):
-		remove = True
-		for x in range(10):
-			if playField.field[y][x][0] == BLACK:
-				remove = False
-		if remove:
-			print("removing line")
-			for x in range(10):
-				playField.field[y][x] = (BLACK, STILL)
-			# time.sleep(0.05)
-			# playField.moveDown()
-			# time.sleep(0.1)
-			playField.levelDown(y)
-			time.sleep(0.1)
-			return True
-	return False
+def resetScreen():
+	full_screen = pygame.Rect(0, 0, _WINDOW_WIDTH, _WINDOW_HEIGHT)
+	WINDOW.fill(pygame.Color(0, 0, 0), full_screen, 0)
 
-
+def animateRemoveLine(playField: PlayField):
+	playField.removeLines()
+	resetScreen()
+	playField.drawField()
+	pygame.display.flip()
 
 def main():
 
@@ -258,8 +276,9 @@ def main():
 
 		moved = handleKeys.makeMoves(playField, now)
 
-		if playField.falling == STILL:
-			removeAnimation = removeLines(playField)
+		if playField.falling == STILL and playField.fullLine():
+			animateRemoveLine(playField)
+			continue
 
 		if not moved and not removeAnimation and playField.falling == FALLING:
 			if now - playField.last_move_down >= 0.5:
@@ -268,26 +287,14 @@ def main():
 		else:
 			playField.generatePiece()
 
-
 		playField.printPiece()
 
-		full_screen = pygame.Rect(0, 0, _WINDOW_WIDTH, _WINDOW_HEIGHT)
-		WINDOW.fill(pygame.Color(0, 0, 0), full_screen, 0)
+		resetScreen()
 
-		if removeAnimation:
-			time.sleep(0.08)
-
-		for y in range(0, playField._height):
-			for x in range(0, playField._width):
-				rect = pygame.Rect(x * BLOCK_LEN, y * BLOCK_LEN, BLOCK_LEN, BLOCK_LEN)
-				block_color = tetris_to_pygame_color(playField.getColor(x, y)[0])
-				pygame.draw.rect(WINDOW, (block_color), rect=rect)
-				pygame.draw.rect(WINDOW, (WHITE_COLOR), rect=rect, width=1)
+		playField.drawField()
 
 		time.sleep(0.016)
 		pygame.display.flip()
-		if removeAnimation:
-			time.sleep(0.2)
 
 if __name__ == "__main__":
 	main()
