@@ -3,24 +3,26 @@ from colors import BLACK, CYAN, BLUE, ORANGE, YELLOW, GREEN, RED, PURPLE, WHITE
 import logging
 from enum import Enum
 
-kickbacks = [
-	[0,0],
-	[1,0],
-	[0,1],
-	[1,1],
-	[-1,0],
-	[0,-1],
-	[-1,-1],
-]
+# kickbacks = [
+# 	[0, 0],
+# 	[1, 0],
+# 	[0, 1],
+# 	[1, 1],
+# 	[-1, 0],
+# 	[0, -1],
+# 	[-1, -1],
+# ]
 
 class Falling(Enum):
 	STILL = 0
 	FALLING = 1
+	IMMOBILE = 2
 
-STILL, FALLING = (Falling.STILL, Falling.FALLING)
+
+STILL, FALLING, IMMOBILE = (Falling.STILL, Falling.FALLING, Falling.IMMOBILE)
 
 class Tetromino(ABC):
-	current_rotation : int
+	current_rotation: int
 	shape = []
 	position = {}
 
@@ -38,7 +40,7 @@ class Tetromino(ABC):
 				ret += str(self.shape[y][x]) + ","
 			ret += "\n"
 		return ret
-	
+
 	@abstractmethod
 	def setColor():
 		pass
@@ -59,10 +61,11 @@ class Tetromino(ABC):
 		self.current_rotation = 0
 		self.shape = self.shapes[0]
 
-	def rotate(self, field : list):
+	def rotate(self, field: list):
+		print("rotate attempt")
 		prev = self.current_rotation
 		self.current_rotation += 1
-		if(self.current_rotation >= len(self.shapes)):
+		if self.current_rotation >= len(self.shapes):
 			self.current_rotation = 0
 
 		curr_shape = self.shapes[self.current_rotation]
@@ -98,11 +101,22 @@ class Tetromino(ABC):
 				last_block_x = first_block_x
 			else:
 				last_block_x += 1
-		
-		logging.info(f"first_block_x: {first_block_x} last_block_x: {last_block_x} first_block_y: {first_block_y} last_block_y: {last_block_y}")
+
+		logging.info(
+			f"first_block_x: {first_block_x} last_block_x: {last_block_x} first_block_y: {first_block_y} last_block_y: {last_block_y}"
+		)
 
 		if first_block_x < 0 or last_block_x > 10 or last_block_y >= 20:
-			logging.info("CANT ROTATE: first_block_x: " + str(first_block_x) + " last_block_x: " + str(last_block_x) + " first_block_y: " + str(first_block_y) + " last_block_y: " + str(last_block_y))
+			logging.info(
+				"CANT ROTATE: first_block_x: "
+				+ str(first_block_x)
+				+ " last_block_x: "
+				+ str(last_block_x)
+				+ " first_block_y: "
+				+ str(first_block_y)
+				+ " last_block_y: "
+				+ str(last_block_y)
+			)
 			logging.info("curr_shape: " + str(curr_shape))
 			self.current_rotation = prev
 			self.shape = self.shapes[prev]
@@ -110,14 +124,18 @@ class Tetromino(ABC):
 
 		for y in range(len(curr_shape)):
 			for x in range(len(curr_shape[y])):
-				if y + start_y < 0 or y + start_y >= 20 or x + start_x < 0 or x + start_x >= 10:
+				if (
+					y + start_y < 0
+					or y + start_y >= 20
+					or x + start_x < 0
+					or x + start_x >= 10
+				):
 					continue
-				if (curr_shape[y][x] != BLACK) and (field[y + start_y][x + start_x] != (BLACK, STILL)):
+				if (curr_shape[y][x] != BLACK) and field[y + start_y][x + start_x][0] != BLACK:
 					logging.info(f"\n\ntetronimo can't be rotated: {self}")
-					logging.info(f"x: {x} y: {y}")
-					logging.info(f"field[{y + start_y}][{x + start_x}]: {field[y + start_y][x + start_x]}")
-					field_str = "\n".join(" ".join(str(cell[0]) for cell in row) for row in field)
-					logging.info(f"field: {field_str}")
+					field_str = "\n".join(
+						" ".join(str(cell[0]) for cell in row) for row in field
+					)
 					can_be_done = False
 					break
 		if can_be_done == False:
@@ -130,28 +148,29 @@ class Tetromino(ABC):
 
 	def checkX(self):
 		logging.info(f"checkX: {9 - self.position['x']}")
-		if(self.position["x"] < 0):
-			x = 0 - self.position["x"] -1
+		if self.position["x"] < 0:
+			x = 0 - self.position["x"] - 1
 			return x
 		else:
 			return 10 - self.position["x"]
 
 	def moveLeft(self):
+		print("PIECE MOVE LEFT")
 		self.position["x"] -= 1
 		text = self.__str__()
 		logging.info(f"shape: {text}")
 		logging.info(f"position: {self.position}")
-		if(self.position["x"] < 0):
+		if self.position["x"] < 0:
 			x = self.checkX()
 			for y in range(len(self.shape)):
-				if(self.shape[y][x] != BLACK):
+				if self.shape[y][x] != BLACK:
 					self.position["x"] += 1
 					break
 
 	def moveRight(self):
-		text = self.__str__()
+		print("PIECE MOVE RIGHT")
 		self.position["x"] += 1
-		if(self.position["x"] + len(self.shape[0]) > 10):
+		if self.position["x"] + len(self.shape[0]) > 10:
 			for y in range(len(self.shape)):
 				x = self.checkX()
 				if self.shape[y][x] != BLACK:
@@ -160,15 +179,18 @@ class Tetromino(ABC):
 
 class Straight(Tetromino):
 	def setColor(self):
-		self.color =  CYAN
+		self.color = CYAN
 
 	def setShapes(self):
-		self.shapes = { 0: [[BLACK, BLACK, BLACK, BLACK],
-				[CYAN, CYAN, CYAN, CYAN]],
-			1: [[BLACK, CYAN, BLACK, BLACK],
-					[BLACK, CYAN, BLACK, BLACK],
-					[BLACK, CYAN, BLACK, BLACK],
-					[BLACK, CYAN, BLACK, BLACK]]}
+		self.shapes = {
+			0: [[BLACK, BLACK, BLACK, BLACK], [CYAN, CYAN, CYAN, CYAN]],
+			1: [
+				[BLACK, CYAN, BLACK, BLACK],
+				[BLACK, CYAN, BLACK, BLACK],
+				[BLACK, CYAN, BLACK, BLACK],
+				[BLACK, CYAN, BLACK, BLACK],
+			],
+		}
 
 	def reset(self):
 		self.resetPos()
@@ -181,17 +203,15 @@ class Straight(Tetromino):
 		self.setShapes()
 		self.initShape()
 
+
 class Square(Tetromino):
 	def setColor(self):
 		self.color = YELLOW
 
 	def setShapes(self):
-		self.shapes = {
-			0: [[YELLOW, YELLOW],
-				[YELLOW, YELLOW]]
-		}
+		self.shapes = {0: [[YELLOW, YELLOW], [YELLOW, YELLOW]]}
 
-	def rotate(self, field : list):
+	def rotate(self, field: list):
 		pass
 
 	def reset(self):
@@ -204,22 +224,17 @@ class Square(Tetromino):
 		self.setShapes()
 		self.initShape()
 
+
 class LeftLShape(Tetromino):
 	def setColor(self):
 		self.color = BLUE
 
 	def setShapes(self):
 		self.shapes = {
-			0: [[BLUE, BLACK, BLACK],
-				[BLUE, BLUE, BLUE]],
-			1: [[BLACK, BLUE, BLUE],
-				[BLACK, BLUE, BLACK],
-				[BLACK, BLUE, BLACK]],
-			2: [[BLUE, BLUE, BLUE],
-				[BLACK, BLACK, BLUE]],
-			3: [[BLACK, BLACK, BLUE],
-				[BLACK, BLACK, BLUE],
-				[BLACK, BLUE, BLUE]]
+			0: [[BLUE, BLACK, BLACK], [BLUE, BLUE, BLUE]],
+			1: [[BLACK, BLUE, BLUE], [BLACK, BLUE, BLACK], [BLACK, BLUE, BLACK]],
+			2: [[BLUE, BLUE, BLUE], [BLACK, BLACK, BLUE]],
+			3: [[BLACK, BLACK, BLUE], [BLACK, BLACK, BLUE], [BLACK, BLUE, BLUE]],
 		}
 
 	def reset(self):
@@ -231,6 +246,7 @@ class LeftLShape(Tetromino):
 		self.setColor()
 		self.setShapes()
 		self.initShape()
+
 
 class RightLShape(Tetromino):
 	def setColor(self):
@@ -238,16 +254,18 @@ class RightLShape(Tetromino):
 
 	def setShapes(self):
 		self.shapes = {
-			0: [[BLACK, BLACK, ORANGE],
-				[ORANGE, ORANGE, ORANGE]],
-			1: [[BLACK, ORANGE, BLACK],
+			0: [[BLACK, BLACK, ORANGE], [ORANGE, ORANGE, ORANGE]],
+			1: [
 				[BLACK, ORANGE, BLACK],
-				[BLACK, ORANGE, ORANGE]],
-			2: [[ORANGE, ORANGE, ORANGE],
-				[ORANGE, BLACK, BLACK]],
-			3: [[BLACK, ORANGE, ORANGE],
+				[BLACK, ORANGE, BLACK],
+				[BLACK, ORANGE, ORANGE],
+			],
+			2: [[ORANGE, ORANGE, ORANGE], [ORANGE, BLACK, BLACK]],
+			3: [
+				[BLACK, ORANGE, ORANGE],
 				[BLACK, BLACK, ORANGE],
-				[BLACK, BLACK, ORANGE]]
+				[BLACK, BLACK, ORANGE],
+			],
 		}
 
 	def reset(self):
@@ -259,6 +277,7 @@ class RightLShape(Tetromino):
 		self.setColor()
 		self.setShapes()
 		self.initShape()
+
 
 class ZShape(Tetromino):
 	def setColor(self):
@@ -266,11 +285,8 @@ class ZShape(Tetromino):
 
 	def setShapes(self):
 		self.shapes = {
-			0: [[RED, RED, BLACK],
-				[BLACK, RED, RED]],
-			1: [[BLACK, BLACK, RED],
-				[BLACK, RED, RED],
-				[BLACK, RED, BLACK]]
+			0: [[RED, RED, BLACK], [BLACK, RED, RED]],
+			1: [[BLACK, BLACK, RED], [BLACK, RED, RED], [BLACK, RED, BLACK]],
 		}
 
 	def reset(self):
@@ -282,6 +298,7 @@ class ZShape(Tetromino):
 		self.setColor()
 		self.setShapes()
 		self.initShape()
+
 
 class SShape(Tetromino):
 	def setColor(self):
@@ -289,11 +306,8 @@ class SShape(Tetromino):
 
 	def setShapes(self):
 		self.shapes = {
-			0: [[BLACK, GREEN, GREEN],
-				[GREEN, GREEN, BLACK]],
-			1: [[BLACK, GREEN, BLACK],
-				[BLACK, GREEN, GREEN],
-				[BLACK, BLACK, GREEN]]
+			0: [[BLACK, GREEN, GREEN], [GREEN, GREEN, BLACK]],
+			1: [[BLACK, GREEN, BLACK], [BLACK, GREEN, GREEN], [BLACK, BLACK, GREEN]],
 		}
 
 	def reset(self):
@@ -306,22 +320,25 @@ class SShape(Tetromino):
 		self.setShapes()
 		self.initShape()
 
+
 class TShape(Tetromino):
 	def setColor(self):
 		self.color = PURPLE
 
 	def setShapes(self):
 		self.shapes = {
-			0: [[BLACK, PURPLE, BLACK],
-				[PURPLE, PURPLE, PURPLE]],
-			1: [[BLACK, PURPLE, BLACK],
+			0: [[BLACK, PURPLE, BLACK], [PURPLE, PURPLE, PURPLE]],
+			1: [
+				[BLACK, PURPLE, BLACK],
 				[BLACK, PURPLE, PURPLE],
-				[BLACK, PURPLE, BLACK]],
-			2: [[PURPLE, PURPLE, PURPLE],
-				[BLACK, PURPLE, BLACK]],
-			3: [[BLACK, BLACK, PURPLE],
+				[BLACK, PURPLE, BLACK],
+			],
+			2: [[PURPLE, PURPLE, PURPLE], [BLACK, PURPLE, BLACK]],
+			3: [
+				[BLACK, BLACK, PURPLE],
 				[BLACK, PURPLE, PURPLE],
-				[BLACK, BLACK, PURPLE]]
+				[BLACK, BLACK, PURPLE],
+			],
 		}
 
 	def reset(self):
@@ -335,24 +352,17 @@ class TShape(Tetromino):
 		self.setShapes()
 		self.initShape()
 
+
 class JShape(Tetromino):
 	def setColor(self):
 		self.color = BLUE
 
 	def setShapes(self):
 		self.shapes = {
-			0: [[BLUE, BLACK, BLACK],
-				[BLUE, BLUE, BLUE],
-				[BLACK, BLACK, BLACK]],
-			1: [[BLACK, BLUE, BLUE],
-				[BLACK, BLUE, BLACK],
-				[BLACK, BLUE, BLACK]],
-			2: [[BLACK, BLACK, BLACK],
-				[BLUE, BLUE, BLUE],
-				[BLACK, BLACK, BLUE]],
-			3: [[BLACK, BLUE, BLACK],
-				[BLACK, BLUE, BLACK],
-				[BLUE, BLUE, BLACK]]
+			0: [[BLUE, BLACK, BLACK], [BLUE, BLUE, BLUE], [BLACK, BLACK, BLACK]],
+			1: [[BLACK, BLUE, BLUE], [BLACK, BLUE, BLACK], [BLACK, BLUE, BLACK]],
+			2: [[BLACK, BLACK, BLACK], [BLUE, BLUE, BLUE], [BLACK, BLACK, BLUE]],
+			3: [[BLACK, BLUE, BLACK], [BLACK, BLUE, BLACK], [BLUE, BLUE, BLACK]],
 		}
 
 	def reset(self):

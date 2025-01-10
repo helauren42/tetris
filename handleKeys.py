@@ -1,15 +1,29 @@
 from colors import BLACK
-from tetronimos import Tetromino,Straight, Square, LeftLShape, RightLShape, ZShape, SShape, TShape, JShape, STILL, FALLING, Falling
+from tetronimos import (
+	Tetromino,
+	Straight,
+	Square,
+	LeftLShape,
+	RightLShape,
+	ZShape,
+	SShape,
+	TShape,
+	JShape,
+	STILL,
+	FALLING,
+	Falling,
+)
 import pygame
 import random
 
-class HandleKeys():
+
+class HandleKeys:
 	keys = {}
 	lastMove = {}
 
 	def __init__(self):
 		self.reset()
-	
+
 	def reset(self):
 		self.keys = {
 			"UP": False,
@@ -43,4 +57,3 @@ class HandleKeys():
 				self.keys["RIGHT"] = False
 			if event.key == pygame.K_UP:
 				self.keys["UP"] = False
-
