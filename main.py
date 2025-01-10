@@ -30,6 +30,7 @@ from tetronimos import (
 	JShape,
 	STILL,
 	FALLING,
+	IMMOBILE,
 	Falling,
 )
 from handleKeys import HandleKeys
@@ -43,22 +44,22 @@ def resetScreen():
 
 
 def animateRemoveLine(playField: PlayField):
+	resetScreen()
+	drawField(playField)
+	pygame.display.flip()
+	time.sleep(0.4)
+
 	playField.removeLines()
 	resetScreen()
 	drawField(playField)
-	time.sleep(0.6)
-
 	pygame.display.flip()
-
 	time.sleep(0.6)
 
 	playField.levelDown()
 	resetScreen()
 	drawField(playField)
 	pygame.display.flip()
-
-	time.sleep(0.6)
-
+	time.sleep(0.4)
 
 def displayGameOver(playField: PlayField):
 	grey_color = pygame.Color(200, 200, 200)
@@ -97,14 +98,11 @@ def main():
 			continue
 		if playField.makeMoves(handleKeys, now):
 			continue
-		if playField.falling == STILL and playField.fullLine():
-			animateRemoveLine(playField)
-			continue
 
-		if playField.falling != FALLING:
-			print("not falling")
-			print ("still time: ", playField.still_time)
-			print("now: ", now)
+		while playField.falling != FALLING and playField.fullLine():
+			animateRemoveLine(playField)
+			playField.still_time = 0
+
 		if playField.falling != FALLING and now - playField.still_time >= 0.5:
 			print("time to generate piece")
 		if playField.falling != FALLING and now - playField.still_time >= 0.5:

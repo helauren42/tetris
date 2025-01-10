@@ -113,6 +113,14 @@ class BaseField(ABC):
 
 	def getColor(self, x: int, y: int):
 		return self.field[y][x]
+	
+	def levelDown(self):
+		if self.remove_y == None:
+			return
+		for y in range(self.remove_y, 0, -1):
+			self.field[y] = self.field[y - 1]
+		self.field[0] = [(BLACK, IMMOBILE)] * 10
+		self.remove_y = None
 
 	# debug
 	def isEmpty(self):
@@ -161,14 +169,6 @@ class PlayField(BaseField):
 		if self.falling != FALLING or self.piece == None or not self.canMoveDown():
 			return
 		self.piece.moveDown()
-
-	def levelDown(self):
-		if self.remove_y == None:
-			return
-		for y in range(self.remove_y, 0, -1):
-			self.field[y] = self.field[y - 1]
-		self.field[0] = [(BLACK, IMMOBILE)] * 10
-		self.remove_y = None
 
 	def fullLine(self):
 		for y in range(20):
